@@ -1,16 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
-  describe 'GET #show' do 
-    let(:question) { create(:question) }
-    before { get :show, params: { id: question } }
+  let(:question) { create(:question) }
 
-    it 'assigns the requested question to @question' do
-      expect(assigns(:question)).to eq question
+  describe 'GET #new' do
+    before { get :new }
+
+    it 'assigns a new Question to @question' do
+      expect(assigns(:question)).to be_a_new(Question)
     end
 
-    it 'render show view' do
-      expect(response).to render_template :show
+    it 'renders new view' do
+      expect(response).to render_template :new
     end
   end
 
