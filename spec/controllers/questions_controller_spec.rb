@@ -2,8 +2,11 @@ require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
   let(:question) { create(:question) }
+  let(:user) { create(:user) }
 
   describe 'GET #new' do
+    before { login(user) }
+
     before { get :new }
 
     it 'assigns a new Question to @question' do
@@ -16,14 +19,16 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'POST #create' do 
+    before { login(user) }
+
     context 'with valid attributes' do
       it 'saves new Question to database' do 
         expect { post :create, params: { question: attributes_for(:question) } }.to change(Question, :count).by(1)
       end
 
-      it 'render show view' do 
+      it 'redirect to show view' do 
         post :create, params: { question: attributes_for(:question) }
-        expect(response).to render_template :show
+        expect(response).to redirect_to assigns(:question)
       end
     end
 
