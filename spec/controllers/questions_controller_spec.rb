@@ -4,6 +4,20 @@ RSpec.describe QuestionsController, type: :controller do
   let(:question) { create(:question) }
   let(:user) { create(:user) }
 
+  describe 'GET #index' do 
+    let(:questions) { create_list(:question, 3) }
+
+    before { get :index }
+
+    it 'show list of Questions' do 
+      expect(assigns(:questions)).to match_array(questions)
+    end
+
+    it 'render index vies' do 
+      expect(response).to render_template :index
+    end
+  end
+
   describe 'GET #new' do
     before { login(user) }
 
@@ -17,6 +31,7 @@ RSpec.describe QuestionsController, type: :controller do
       expect(response).to render_template :new
     end
   end
+
 
   describe 'POST #create' do 
     before { login(user) }

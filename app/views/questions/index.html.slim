@@ -1,3 +1,8 @@
+h1 List of Questions
+div
+  ul
+    - @questions.each do |q|
+        li= link_to "#{q.title}: #{q.body}", question_path(q)
+
 p= link_to 'Ask question', new_question_path
 p= link_to 'Sign out', destroy_user_session_path, method: :delete
-
