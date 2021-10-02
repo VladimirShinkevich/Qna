@@ -3,18 +3,9 @@ require 'rails_helper'
 RSpec.describe AnswersController, type: :controller do
   let(:answer) { create(:answer) }
   let(:question) { create(:question) }
-
-  describe 'GET #new' do
-    before { get :new, params: { question_id: question } }
-
-    it 'assigns a new Answer to @answer' do 
-      expect(assigns(:answer)).to be_a_new(Answer)
-    end
-
-    it 'render new view' do 
-      expect(response).to render_template :new
-    end
-  end
+  let(:user) { create(:user)}
+  
+  before { login(user) }
 
   describe 'POST #create' do 
 
@@ -23,9 +14,9 @@ RSpec.describe AnswersController, type: :controller do
         expect { post :create, params: { question_id: question, answer: attributes_for(:answer) } }.to change(question.answers, :count).by(1)
       end
 
-      it 'render show view' do 
+      it 'redirect to @question' do 
         post :create, params: { question_id: question, answer: attributes_for(:answer) }
-        expect(response).to render_template :show
+        expect(response).to redirect_to assigns(:answer)
       end
     end
 
@@ -36,8 +27,14 @@ RSpec.describe AnswersController, type: :controller do
 
       it 'render new view' do 
         post :create, params: { question_id: question, answer: attributes_for(:answer, :invalid) }
-        expect(response).to render_template :new
+        expect(response).to render_template "questions/show"
       end
     end
   end
+
+  describe 'DELETE #destroy' do 
+    it 'some describe'
+  end
+
+
 end

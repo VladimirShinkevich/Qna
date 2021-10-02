@@ -1,1 +1,5 @@
 h1 Show answer
+
+p= @answer.body
+p= @answer.author.email
+p= link_to "Back to question", question_path(@answer.question)

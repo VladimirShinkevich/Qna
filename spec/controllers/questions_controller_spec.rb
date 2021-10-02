@@ -18,6 +18,22 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
+  describe 'GET #show' do 
+    before { get :show, params: { id: question } }
+
+    it 'assigns the requested question to @question ' do 
+      expect(assigns(:question)).to eq question
+    end
+
+    it 'render show view' do 
+      expect(response).to render_template :show
+    end
+
+    it 'assigns new Answer to @answer' do 
+      expect(assigns(:answer)).to be_a_new(Answer)
+    end
+  end
+
   describe 'GET #new' do
     before { login(user) }
 
@@ -32,6 +48,9 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
+  describe 'GET #edit' do 
+    it 'some describe'
+  end
 
   describe 'POST #create' do 
     before { login(user) }
@@ -55,6 +74,43 @@ RSpec.describe QuestionsController, type: :controller do
       it 'render new view' do 
         post :create, params: { question: attributes_for(:question, :invalid) }
         expect(response).to render_template :new
+      end
+    end
+  end
+
+  describe 'PATCH #update' do 
+    it 'some describe'
+  end
+
+  describe 'DELETE #destroy' do 
+    
+    describe "Auth user" do 
+      before { login(user) }
+
+      context 'is author' do 
+        let!(:question) { create(:question, author: user) }
+
+        it 'delete question from database' do 
+          expect { delete :destroy, params: { id: question } }.to change(Question, :count).by(-1)
+        end
+
+        it 'redirect to index ' do 
+          delete :destroy, params: { id: question }
+          expect(response).to redirect_to questions_path
+        end
+      end
+
+      context "is't author" do 
+        let!(:question) { create(:question) }
+
+        it "can't delete question from database" do 
+          expect { delete :destroy, params: { id: question } }.to_not change(Question, :count)
+        end
+
+        it 're render index' do 
+          delete :destroy, params: { id: question }
+          expect(response).to render_template :show
+        end
       end
     end
   end
