@@ -3,6 +3,7 @@ require 'rails_helper'
 feature 'User can create question' do
   
   given(:user) { create(:user) }
+  given(:question) { create(:question) }
 
   describe 'Authenticated user' do 
 
@@ -14,13 +15,13 @@ feature 'User can create question' do
     end
 
     scenario 'user can asks a question' do 
-      fill_in 'Title', with: 'Test question'
-      fill_in 'Body', with: 'text text text'
+      fill_in 'Title', with: question.title
+      fill_in 'Body', with: question.body
       click_on 'Ask'
 
       expect(page).to have_content "Your question is successfuly created."
-      expect(page).to have_content 'Test question'
-      expect(page).to have_content 'text text text'
+      expect(page).to have_content question.title
+      expect(page).to have_content question.body
     end
 
     scenario 'asks a question with errors' do 

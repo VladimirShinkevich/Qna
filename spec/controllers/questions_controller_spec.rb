@@ -83,7 +83,6 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do 
-    
     describe "Auth user" do 
       before { login(user) }
 
@@ -107,7 +106,7 @@ RSpec.describe QuestionsController, type: :controller do
           expect { delete :destroy, params: { id: question } }.to_not change(Question, :count)
         end
 
-        it 're render index' do 
+        it 're render show' do 
           delete :destroy, params: { id: question }
           expect(response).to render_template :show
         end

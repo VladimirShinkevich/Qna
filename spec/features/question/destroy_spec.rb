@@ -1,9 +1,8 @@
 require 'rails_helper'
 
-feature 'User tries delete question' do 
+feature 'User delete question' do 
 
   describe 'Authenticated user tries delete question' do
-    
     describe 'Auth user ' do 
       given(:user) { create(:user_with_questions) }
 
