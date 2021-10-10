@@ -6,7 +6,7 @@ feature 'User can create answer' do
   given(:question) { create(:question) }
   given(:answer) { create(:answer) }
 
-  describe 'Authenticated user' do 
+  describe 'Authenticated user', js: true do 
 
     background do 
       signin(user)
@@ -16,13 +16,13 @@ feature 'User can create answer' do
 
     scenario 'user tries to create a answer with valid attributes' do 
       fill_in 'Body', with: answer.body
-      click_on 'Ask answer'
+      click_on 'Create answer'
 
       expect(page).to have_content answer.body
     end
 
     scenario 'user tries create answer with invalid attributes' do 
-      click_on 'Ask answer'
+      click_on 'Create answer'
 
       expect(page).to have_content "Body can't be blank"
     end
@@ -30,7 +30,7 @@ feature 'User can create answer' do
 
   scenario 'Unregistreted user tries to create answer' do 
     visit question_path(question)
-    click_on 'Ask answer'
+    click_on 'Create answer'
 
     expect(page).to have_content 'You need to sign in or sign up before continuing.'
   end

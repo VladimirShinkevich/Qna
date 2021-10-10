@@ -9,10 +9,10 @@ class AnswersController < ApplicationController
     @answer.author_id = current_user.id
 
     if @answer.save
-      redirect_to @answer, notice: 'You answer succefully created!'
+      redirect_to @question, notice: 'You answer succefully created!'
+     
     else
-      @question.reload
-      render 'questions/show', notice: "You answer was't created!"
+      flash[:notice] = "Your answer was't created!"
     end
   end
 
