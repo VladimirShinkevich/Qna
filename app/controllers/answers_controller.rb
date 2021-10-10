@@ -1,21 +1,35 @@
 class AnswersController < ApplicationController
-  before_action :find_question, only: %i[new create]
-
-  def new
-    @answer = @question.answers.new
-  end
+  before_action :authenticate_user!, except: :show
+  before_action :find_question, only: %i[create]
+  before_action :find_answer, only: %i[show destroy]
+  
 
   def create 
     @answer = @question.answers.new(answer_params)
+    @answer.author_id = current_user.id
 
     if @answer.save
-      render :show 
+      redirect_to @answer, notice: 'You answer succefully created!'
     else
-      render :new
+      @question.reload
+      render 'questions/show', notice: "You answer was't created!"
+    end
+  end
+
+  def destroy
+    if current_user&.author_of?(@answer)
+      @answer.destroy
+      redirect_to question_path(@answer.question), notice: 'You answer if succefully deleted!'
+    else 
+      redirect_to question_path(@answer.question), notice: 'You are not a author of answer!'
     end
   end
 
   private 
+
+  def find_answer
+    @answer = Answer.find(params[:id])
+  end
 
   def find_question
     @question = Question.find(params[:question_id])
