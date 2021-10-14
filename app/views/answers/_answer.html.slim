@@ -1,0 +1,17 @@
+ul
+  li.answer id="answer-#{answer.id}"
+    div(class= "answer-errors-#{answer.id}")
+    div
+      = "Author - #{answer.author.email}"
+      br
+      = answer.body
+      br
+    -if current_user&.author_of?(answer)
+      = link_to "delete answer", answer_path(answer), method: :delete, data: { confirm: "Are you sure?" }
+      br
+      = link_to 'Edit', '#', class: "edit-answer-link", data: { answer_id: answer.id }
+
+= form_with model: answer, local: false, class: 'hidden', html: { id: "edit-answer-#{answer.id}" } do |f|
+  =f.label :body, "Your answer"
+  = f.text_area :body, placeholder: 'Body'
+  p= f.submit 'Save'

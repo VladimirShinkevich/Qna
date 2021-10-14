@@ -1,20 +1,15 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!, except: :show
   before_action :find_question, only: %i[create]
-  before_action :find_answer, only: %i[show destroy]
+  before_action :find_answer, only: %i[show destroy update]
   
 
   def create 
-    @answer = @question.answers.new(answer_params)
-    @answer.author_id = current_user.id
-
-    if @answer.save
-      redirect_to @question, notice: 'You answer succefully created!'
-     
-    else
-      flash[:notice] = "Your answer was't created!"
-    end
+    @answer = @question.answers.create(answer_params.merge(question: @question, author: current_user))
+    #@answer.author_id = current_user.id
   end
+
+  def edit; end
 
   def destroy
     if current_user&.author_of?(@answer)
@@ -22,6 +17,13 @@ class AnswersController < ApplicationController
       redirect_to question_path(@answer.question), notice: 'You answer if succefully deleted!'
     else 
       redirect_to question_path(@answer.question), notice: 'You are not a author of answer!'
+    end
+  end
+
+  def update
+    if current_user&.author_of?(@answer)
+      @answer.update(answer_params)
+      @question = @answer.question
     end
   end
 
