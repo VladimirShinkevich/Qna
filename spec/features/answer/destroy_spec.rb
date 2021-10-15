@@ -2,20 +2,19 @@ require 'rails_helper'
 
 feature 'User delete answer' do 
 
-  describe 'Authenticated user tries delete answer' do 
+  describe 'Authenticated user tries delete answer', js: true do 
     describe 'Auth user' do
-      given(:answer) { create(:answer) }
-      given(:user) { answer.author }
-      given(:question) { answer.question }
+      given(:user) { create(:user) }
+      given(:question) { create(:question, author: user) }
+      given!(:answer) { create(:answer, question: question, author: user, body: 'some text') }
 
       background { signin(user) }
 
       scenario 'is author of answer' do 
         visit question_path(question)
-        expect(page).to have_link 'delete answer'
-
-        click_on 'delete answer'
-        expect(page).to have_content "You answer if succefully deleted!"
+        click_on 'Delete answer'
+        
+        expect(page).to_not have_content answer.body
       end
     end
 
@@ -29,7 +28,7 @@ feature 'User delete answer' do
       scenario 'is not a author of answer' do 
         visit question_path(question)
 
-        expect(page).to_not have_link "delete answer"
+        expect(page).to_not have_link "Delete answer"
       end
     end
   end

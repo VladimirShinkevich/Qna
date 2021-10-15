@@ -7,7 +7,7 @@ ul
       = answer.body
       br
     -if current_user&.author_of?(answer)
-      = link_to "delete answer", answer_path(answer), method: :delete, data: { confirm: "Are you sure?" }
+      = link_to "Delete answer", '#', class: "delete-answer-link", data: { answer_id: answer.id }
       br
       = link_to 'Edit', '#', class: "edit-answer-link", data: { answer_id: answer.id }
 

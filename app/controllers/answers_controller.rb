@@ -6,7 +6,6 @@ class AnswersController < ApplicationController
 
   def create 
     @answer = @question.answers.create(answer_params.merge(question: @question, author: current_user))
-    #@answer.author_id = current_user.id
   end
 
   def edit; end
@@ -14,9 +13,7 @@ class AnswersController < ApplicationController
   def destroy
     if current_user&.author_of?(@answer)
       @answer.destroy
-      redirect_to question_path(@answer.question), notice: 'You answer if succefully deleted!'
-    else 
-      redirect_to question_path(@answer.question), notice: 'You are not a author of answer!'
+      @question = @answer.question
     end
   end
 
