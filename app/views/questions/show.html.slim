@@ -1,8 +1,7 @@
-p Question Title:
-p= @question.title
-p Question Body:
-p= @question.body
-p= link_to "Delete question", question_path(@question), method: :delete, data: { confirm: "Are you sure?" } if current_user&.author_of?(@question)
+p Question
+
+.question
+  = render @question
 
 p Answers list:
 

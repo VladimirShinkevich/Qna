@@ -18,6 +18,9 @@ import "jquery"
 global.jQuery, global.$ = require("jquery");
 
 require("../utilities/edit_answer")
+require("../utilities/edit_question")
+
+
 
 Rails.start()
 Turbolinks.start()
