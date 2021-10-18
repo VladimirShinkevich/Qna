@@ -7,5 +7,9 @@ FactoryBot.define do
     trait :invalid do
       body { nil }
     end
+
+    trait :without_question do
+    body { 'MyAnswer' }
+  end
   end
 end

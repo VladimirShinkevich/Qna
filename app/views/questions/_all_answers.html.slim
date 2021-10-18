@@ -1,0 +1,6 @@
+= if !@question.best_answer.nil?
+  .best_answer
+    = render partial: 'answers/best_answer', resoursce: @question.best_answer
+
+.other-answers
+  = render @question.other_answers

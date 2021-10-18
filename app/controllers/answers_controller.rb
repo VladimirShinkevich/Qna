@@ -1,9 +1,8 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!, except: :show
   before_action :find_question, only: %i[create]
-  before_action :find_answer, only: %i[show destroy update]
+  before_action :find_answer, only: %i[show destroy update mark_as_best]
   
-
   def create 
     @answer = @question.answers.create(answer_params.merge(question: @question, author: current_user))
   end
@@ -22,6 +21,11 @@ class AnswersController < ApplicationController
       @answer.update(answer_params)
       @question = @answer.question
     end
+  end
+
+  def mark_as_best
+    @question = @answer.question
+    @question.update(best_answer_id: @answer.id)
   end
 
   private 

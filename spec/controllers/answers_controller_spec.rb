@@ -111,4 +111,36 @@ RSpec.describe AnswersController, type: :controller do
       end
     end
   end
+
+  describe 'POST #mark_as_best' do
+    context 'when user is the author of question' do
+      let(:question) { create(:question, :with_answers, author: user) }
+      let(:answer) { question.answers.first }
+
+      it 'has best answer' do
+        patch :mark_as_best, params: { id: answer }, format: :js
+        expect(question.reload.best_answer_id).to eq answer.id
+      end
+
+      it 'renders :mark_best view' do
+        patch :mark_as_best, params: { id: answer }, format: :js
+        expect(response).to render_template :mark_as_best
+      end
+    end
+
+    context 'when user is not the author of question' do
+      let(:question) { create(:question, :with_answers) }
+      let(:answer) { question.answers.first }
+
+      it 'has best answer' do
+        patch :mark_as_best, params: { id: answer }, format: :js
+        expect(question.best_answer_id).to eq nil
+      end
+
+      it 'renders mark_best view' do
+        patch :mark_as_best, params: { id: answer }, format: :js
+        expect(response).to render_template :mark_as_best
+      end
+    end
+  end
 end

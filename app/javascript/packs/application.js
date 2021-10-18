@@ -17,6 +17,7 @@ import "jquery"
 
 global.jQuery, global.$ = require("jquery");
 
+require("../utilities/best_answer")
 require("../utilities/edit_answer")
 require("../utilities/destroy_answer")
 require("../utilities/edit_question")

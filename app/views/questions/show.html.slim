@@ -6,15 +6,8 @@ p Question
 p Answers list:
 
 .answers
-  = render @question.answers
+  = render partial: 'questions/all_answers', resource: @question
 
 p Ask new Answer:
 
-.answer-errors
-  =render 'shared/errors', resource: @answer
-
-= form_with model: [@question, @answer], class: 'new-answer', local: false do |f|
-  = f.text_area :body, placeholder: 'Body'
-  p= f.submit 'Create answer'
-
-p= link_to 'Back to questions list', questions_path
+= render partial: 'answers/new_answer', resource: @answer
