@@ -1,7 +1,7 @@
 ul
   li.answer id="answer-#{answer.id}"
     div(class= "answer-errors-#{answer.id}")
-    div
+    p
       = "Author - #{answer.author.email}"
       br
       = answer.body
@@ -9,10 +9,10 @@ ul
 
     .make_best
       -if current_user&.author_of?(answer.question)
-        = link_to 'Best Answer!', '#', class: 'best-answer-link', data: { answer_id: answer.id }
+        = link_to 'Best Answer!', mark_as_best_answer_path(answer), method: :patch, remote: true
 
     -if current_user&.author_of?(answer)
-      = link_to "Delete answer", '#', class: "delete-answer-link", data: { answer_id: answer.id }
+      = link_to "Delete answer", answer_path(answer), method: :delete, remote: true, class: 'delete-answer'
       br
       = link_to 'Edit', '#', class: "edit-answer-link", data: { answer_id: answer.id }
 

@@ -10,10 +10,10 @@ feature 'User delete answer' do
 
       background { signin(user) }
 
-      scenario 'is author of answer' do 
+      scenario 'is author of answer', js: true do 
         visit question_path(question)
         click_on 'Delete answer'
-        
+       
         expect(page).to_not have_content answer.body
       end
     end

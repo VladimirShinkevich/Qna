@@ -1,5 +1,4 @@
-$('.answer-errors-<%= @answer.id %>').html("<%= render 'shared/errors', resource: @answer %>");
-
-<% if !@answer.errors.present? %>
-  $('.answers').html('<%= j render @question.answers %>');
-<% end %>
+$('.delete-answer').bind('ajax:success', function(e) {
+  $(this).find('.answer-<%= @answer.id %>').remove();
+})
+$('.answers').html('<%= j render @question.answers %>');
