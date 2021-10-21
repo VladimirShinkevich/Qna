@@ -1,23 +1,13 @@
-p Question Title:
-p= @question.title
-p Question Body:
-p= @question.body
-p= link_to "Delete question", question_path(@question), method: :delete, data: { confirm: "Are you sure?" } if current_user&.author_of?(@question)
+p Question
+
+.question
+  = render @question
 
 p Answers list:
 
-ul
-  -@question.answers.each do |a|
-    li= "#{a.body}"
-    = "Author - #{a.author.email}, "
-    = link_to "delete answer", answer_path(a), method: :delete, data: { confirm: "Are you sure?" } if current_user&.author_of?(a)
+.answers
+  = render partial: 'questions/all_answers', resource: @question
 
 p Ask new Answer:
 
-=render 'shared/errors', resource: @answer
-
-= form_with model: [@question, @answer], local: true do |f|
-  = f.text_area :body, placeholder: 'Body'
-  p= f.submit 'Ask answer'
-
-p= link_to 'Back to questions list', questions_path
+= render partial: 'answers/new_answer', resource: @answer
