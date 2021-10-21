@@ -4,5 +4,9 @@ p
   br
   = 'Author: '
   = @question.best_answer.author.email
-
+  br
+  = 'Files: '
+  - if @question.best_answer.files.attached?
+    - @question.best_answer.files.each do |file|
+      = link_to file.filename.to_s, url_for(file)
   hr

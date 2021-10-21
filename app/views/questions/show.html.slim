@@ -8,6 +8,10 @@ p Answers list:
 .answers
   = render partial: 'questions/all_answers', resource: @question
 
-p Ask new Answer:
 
-= render partial: 'answers/new_answer', resource: @answer
+
+- if current_user
+  p Ask new Answer:
+  = render partial: 'answers/new_answer', resource: @answer
+
+p= link_to 'Back to questions list', questions_path
