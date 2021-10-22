@@ -7,10 +7,12 @@ ul
       = answer.body
       br
       = "Files: "
-      - if answer.files.attached?
-        - answer.files.each do |file|
-          =link_to file.filename.to_s, url_for(file)
-          br
+      .file_answer
+        - if answer.files.attached?
+          - answer.files.each do |file|
+            p id="file-id-#{file.id}"
+            p= link_to file.filename.to_s, url_for(file)
+            p= link_to "Delete file", file_path(file), method: :delete, remote: true, class: 'delete-file' if current_user&.author_of?(answer)
 
     .make_best
       -if current_user&.author_of?(answer.question)

@@ -9,6 +9,14 @@ FactoryBot.define do
       body { nil }
     end
 
+    trait :question_with_files do 
+      after(:build) do |question|
+        question.files.attach(
+        io: File.open("#{Rails.root}/spec/rails_helper.rb"),
+        filename: 'rails_helper.rb')
+      end
+    end
+
     transient do 
       answers_count { 5 }
     end

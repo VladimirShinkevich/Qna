@@ -8,9 +8,12 @@ p= question.body
   p= link_to "Edit question", '#', class: "edit-question-link", data: { question_id: question.id }
 
 p Files:
-- if @question.files.attached?
-  - @question.files.each do |file|
-    p= link_to file.filename.to_s, url_for(file)
+.file
+  - if @question.files.attached?
+    - @question.files.each do |file|
+      p id="file-id-#{file.id}"
+        p= link_to file.filename.to_s, url_for(file)
+        p= link_to "Delete file", file_path(file), method: :delete, remote: true, class: 'delete-file' if current_user&.author_of?(question)
 
 .question-errors
   =render 'shared/errors', resource: question
@@ -23,6 +26,6 @@ p Files:
   = f.text_area :body, placeholder: 'Body'
 
   = f.label :files
-  = f.file_field :files, multiple: true
+  = f.file_field :files, multiple: true, direct_upload: true
 
   p= f.submit 'Save question'

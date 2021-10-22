@@ -1,8 +1,10 @@
-h1 List of Questions
 div
-  ul
+  h1(class="text-center") List of Questions
+div(class="container-xl text-center")
+  div(class='list-group')
     - @questions.each do |q|
-        li= link_to "#{q.title}: #{q.body}", question_path(q)
+        p= link_to "#{q.title}: #{q.body}", question_path(q), class: "list-group-item list-group-item-action"
 
-- if current_user
-  p= link_to 'Ask question', new_question_path
+  - if current_user
+    br
+    = link_to 'Ask question', new_question_path, type: 'button', class: 'btn btn-primary'
