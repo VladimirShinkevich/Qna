@@ -13,11 +13,11 @@ feature 'User can mark answer as best', js: true do
     end
 
     scenario 'marks as best' do
-      within all('.answer').last do
+      within all('.make_best').last do
         click_on 'Best Answer!'
       end
 
-      expect(page).to have_content 'The Best answer: '
+      expect(page).to have_content 'The Best answer'
       expect(first('.answers')).to have_content answer2.body
     end
   end

@@ -11,7 +11,7 @@ feature 'User delete files' do
       signin(user_author)
       visit question_path(question)
 
-      within '.file' do
+      within all('.file').last do
         expect(page).to have_link 'rails_helper.rb' 
         click_on 'Delete file'
       end   
