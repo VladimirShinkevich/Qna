@@ -12,6 +12,10 @@ div(class="container border bg-light")
           p= link_to file.filename.to_s, url_for(file), class: "btn btn-outline-info"
           p= link_to "Delete file", file_path(file), method: :delete, class: "btn btn-outline-danger", remote: true if current_user&.author_of?(answer)
 
+  p= "Links: "
+  - answer.links.each do |link|
+    = link_to link.name, link.url
+
   .make_best
     -if current_user&.author_of?(answer.question)
       = link_to 'Best Answer!', mark_as_best_answer_path(answer), method: :patch, remote: true, class:"btn btn-success"
@@ -21,11 +25,11 @@ div(class="container border bg-light")
       br
       = link_to 'Edit', '#', class: "edit-answer-link btn btn-outline-warning", data: { answer_id: answer.id }
 
-= form_with model: answer, local: false, class: 'hidden', html: { id: "edit-answer-#{answer.id}" } do |f|
-  = f.label :body, "Your answer"
-  = f.text_area :body, placeholder: 'Body'
+  = form_with model: answer, local: false, class: 'hidden', html: { id: "edit-answer-#{answer.id}" } do |f|
+    = f.label :body, "Your answer"
+    = f.text_area :body, placeholder: 'Body'
 
-  = f.label :files
-  = f.file_field :files, multiple: true, direct_upload: true
+    = f.label :files
+    = f.file_field :files, multiple: true, direct_upload: true
 
-  p= f.submit 'Save'
+    p= f.submit 'Save'

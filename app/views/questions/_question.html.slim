@@ -15,6 +15,12 @@ p Files:
         p= link_to file.filename.to_s, url_for(file)
         p= link_to "Delete file", file_path(file), method: :delete, remote: true if current_user&.author_of?(question)
 
+p Links:
+.links
+  - @question.links.each do |link|
+    = link_to link.name, link.url
+
+
 .question-errors
   =render 'shared/errors', resource: question
 

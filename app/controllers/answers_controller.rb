@@ -5,6 +5,7 @@ class AnswersController < ApplicationController
   
   def create 
     @answer = @question.answers.create(answer_params.merge(question: @question, author: current_user))
+    #@answer.links.new
   end
 
   def edit; end
@@ -39,6 +40,6 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:body, files: [])
+    params.require(:answer).permit(:body, files: [], links_attributes: [:name, :url])
   end
 end

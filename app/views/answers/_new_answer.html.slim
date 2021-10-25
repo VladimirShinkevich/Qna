@@ -2,9 +2,22 @@
   =render 'shared/errors', resource: @answer
 
 = form_with model: [@question, @answer], class: 'new-answer', local: false do |f|
-  = f.text_area :body, placeholder: 'Body'
+  p
+    = f.label :body, "Your answer"
+    = f.text_area :body, placeholder: 'Body'
 
-  p= f.label :files
-  = f.file_field :files, multiple: true
+  p
+    = f.label :files
+    = f.file_field :files, multiple: true
+
+  p
+    = f.fields_for :links do |l|
+      p
+        = l.label :name, 'My link'
+        = l.text_field :name
+
+      p
+        = l.label :url
+        = l.text_field :url
 
   p= f.submit 'Create answer'
