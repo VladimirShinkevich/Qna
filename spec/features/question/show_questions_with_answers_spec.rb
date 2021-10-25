@@ -8,6 +8,6 @@ feature 'User can see question with answers' do
 
     expect(page).to have_content question.title
     expect(page).to have_content question.body
-    expect(page.all('li').size).to eq question.answers.count
+    expect(page.all('ul').size).to eq question.answers.count
   end
 end

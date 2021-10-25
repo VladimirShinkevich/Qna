@@ -1,13 +1,16 @@
-p Question
+div(class="container-xl")
+  p Question
 
-.question
-  = render @question
+  .question
+    = render @question
 
-p Answers list:
+  p Answers list:
 
-.answers
-  = render partial: 'questions/all_answers', resource: @question
+  .answers
+    = render partial: 'questions/all_answers', resource: @question
 
-p Ask new Answer:
+  - if current_user
+    p Ask new Answer:
+    = render partial: 'answers/new_answer', resource: @answer
 
-= render partial: 'answers/new_answer', resource: @answer
+  p= link_to 'Back to questions list', questions_path

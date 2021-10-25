@@ -3,6 +3,8 @@
 
 = form_with model: [@question, @answer], class: 'new-answer', local: false do |f|
   = f.text_area :body, placeholder: 'Body'
-  p= f.submit 'Create answer'
 
-p= link_to 'Back to questions list', questions_path
+  p= f.label :files
+  = f.file_field :files, multiple: true
+
+  p= f.submit 'Create answer'
