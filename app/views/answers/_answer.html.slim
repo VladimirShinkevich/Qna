@@ -14,7 +14,7 @@ div(class="container border bg-light")
 
   p= "Links: "
   - answer.links.each do |link|
-    = link_to link.name, link.url
+    p= link_to link.name, link.url, type: "button", class: "btn btn-info"
 
   .make_best
     -if current_user&.author_of?(answer.question)
@@ -26,10 +26,19 @@ div(class="container border bg-light")
       = link_to 'Edit', '#', class: "edit-answer-link btn btn-outline-warning", data: { answer_id: answer.id }
 
   = form_with model: answer, local: false, class: 'hidden', html: { id: "edit-answer-#{answer.id}" } do |f|
-    = f.label :body, "Your answer"
-    = f.text_area :body, placeholder: 'Body'
+    p
+      = f.label :body, "Your answer"
+      = f.text_area :body, placeholder: 'Body'
+    p
+      = f.label :files
+      = f.file_field :files, multiple: true, direct_upload: true
 
-    = f.label :files
-    = f.file_field :files, multiple: true, direct_upload: true
+    p Links:
+    p
+      = f.fields_for :links do |link|
+        = render 'answers/links_fields', f: link
+      .links
+        = link_to_add_association 'add link', f, :links, partial: 'answers/links_fields', class: 'btn btn-primary', type: 'button'
+
 
     p= f.submit 'Save'
