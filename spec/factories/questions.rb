@@ -17,6 +17,12 @@ FactoryBot.define do
       end
     end
 
+    trait :with_link do
+      after(:create) do |question|
+        create(:link, linkable: question)
+      end
+    end
+
     transient do 
       answers_count { 5 }
     end

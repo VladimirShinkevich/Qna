@@ -1,8 +1,8 @@
-div(class="container border bg-light mb-3")
+div(class="container border bg-danger p-2 text-dark bg-opacity-50 mb-3")
   p Title:
   = question.title
 
-div(class="container border bg-light mb-3")
+div(class="container border bg-danger p-2 text-dark bg-opacity-10 mb-3")
   p Body:
   = question.body
 
@@ -13,20 +13,18 @@ div(class="container border bg-light mb-3")
     - if @question.files.attached?
       - @question.files.each do |file|
         div id="file-id-#{file.id}"
-          p= link_to file.filename.to_s, url_for(file), class: "btn btn-outline-info"
+          p= link_to file.filename.to_s, url_for(file), class: "btn btn-outline-info", target: "_blank"
           p= link_to "Delete file", file_path(file), method: :delete, remote: true, class: "btn btn-outline-danger" if current_user&.author_of?(question)
 
 div(class="container border bg-light")
   p Links:
   .links
-    - @question.links.each do |link|
-      p= link_to link.name, link.url, type: "button", class: "btn btn-info"
-
+    = render question.links
 
 .question-errors
   =render 'shared/errors', resource: question
 
-= form_with model: question, local: false,class: 'hidden', html: { id: "edit-question-#{question.id}" } do |f|
+= form_with model: question, local: false,class: 'hidden container border bg-light mb-3', html: { id: "edit-question-#{question.id}" } do |f|
   p
     = f.label :title, 'Your title'
     = f.text_area :title, placeholder: 'Title'
