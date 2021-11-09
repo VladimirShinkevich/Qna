@@ -75,7 +75,7 @@ feature 'User can edit his question' do
         
         click_on 'add link'
 
-        fill_in 'Name', with: "Yandex"
+        fill_in 'Link', with: "Yandex"
         fill_in 'Url', with: 'http://yandex.ru'
 
         click_on 'Save question'

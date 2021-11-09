@@ -18,7 +18,7 @@ feature 'User can add links to answer' do
     end
 
     scenario 'adds links when asks answer' do 
-      fill_in 'Name', with: 'My link'
+      fill_in 'Link', with: 'My link'
       fill_in 'Url', with: gist_url
 
       click_on 'Create answer'
@@ -31,9 +31,9 @@ feature 'User can add links to answer' do
     scenario 'adds more than one link to answer' do 
       click_on 'add link'
 
-      page.all(:fillable_field, 'Name').first.set('My gist')
+      page.all(:fillable_field, 'Link').first.set('My gist')
       page.all(:fillable_field, 'Url').first.set(gist_url)
-      page.all(:fillable_field, 'Name').last.set('Google')
+      page.all(:fillable_field, 'Link').last.set('Google')
       page.all(:fillable_field, 'Url').last.set(google_link)
 
       click_on 'Create answer'

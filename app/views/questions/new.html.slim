@@ -22,6 +22,11 @@ h1 New Question
     .links
       = link_to_add_association 'add link', f, :links, partial: 'links/links_fields', class: 'btn btn-primary', type: 'button'
 
+  p Award
+  p
+    = f.fields_for :award do |a|
+      = render 'awards/awards_fields', f: a
+
   p= f.submit 'Ask'
 
-p= link_to 'Back to questions list', questions_path
+p= link_to 'Back to questions list', questions_path, class: 'btn btn-primary', type: 'button'

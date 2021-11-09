@@ -16,6 +16,12 @@ div(class="container border bg-light mb-3")
           p= link_to file.filename.to_s, url_for(file), class: "btn btn-outline-info", target: "_blank"
           p= link_to "Delete file", file_path(file), method: :delete, remote: true, class: "btn btn-outline-danger" if current_user&.author_of?(question)
 
+div(class="container border bg-light mb-3")
+  p Award:
+  - if @question.award.present?
+    = image_tag @question.award.image, size:"300x200"
+    = @question.award.name
+
 div(class="container border bg-light")
   p Links:
   .links

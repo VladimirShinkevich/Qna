@@ -18,7 +18,8 @@ feature 'User can add links to question' do
     end
 
     scenario 'adds links when asks question' do 
-      fill_in 'Name', with: 'My gist'
+      #save_and_open_page
+      fill_in 'Link', with: 'My gist'
       fill_in 'Url', with: gist_url
 
       click_on 'Ask'
@@ -29,9 +30,9 @@ feature 'User can add links to question' do
     scenario 'adds more than one link to question' do 
       click_on 'add link'
 
-      page.all(:fillable_field, 'Name').first.set('My gist')
+      page.all(:fillable_field, 'Link').first.set('My gist')
       page.all(:fillable_field, 'Url').first.set(gist_url)
-      page.all(:fillable_field, 'Name').last.set('Google')
+      page.all(:fillable_field, 'Link').last.set('Google')
       page.all(:fillable_field, 'Url').last.set(google_link)
 
       click_on 'Ask'

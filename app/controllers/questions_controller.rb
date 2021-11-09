@@ -9,6 +9,7 @@ class QuestionsController < ApplicationController
   def new
     @question = current_user.questions.new
     @question.links.new
+    @question.build_award
   end
 
   def show
@@ -50,6 +51,7 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :body, files: [], links_attributes: [:id, :name, :url, :_destroy])
+    params.require(:question).permit(:title, :body, award_attributes: [:id, :name, :image, :_destroy], files: [], 
+      links_attributes: [:id, :name, :url, :_destroy])
   end
 end
