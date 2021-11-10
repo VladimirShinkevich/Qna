@@ -5,7 +5,6 @@ class AnswersController < ApplicationController
   
   def create 
     @answer = @question.answers.create(answer_params.merge(question: @question, author: current_user))
-    #@answer.links.new
   end
 
   def edit; end
@@ -27,6 +26,7 @@ class AnswersController < ApplicationController
   def mark_as_best
     @question = @answer.question
     @question.update(best_answer_id: @answer.id)
+    @question.award&.update(user: @answer.author)
   end
 
   private 
