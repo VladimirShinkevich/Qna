@@ -1,7 +1,10 @@
 nav(class="nav justify-content-end navbar navbar-expand-lg navbar-light bg-info")
   div(class='conteiner-fluid')
     - if user_signed_in?
-      h4 = link_to "Sign out", destroy_user_session_path, method: :delete
-      = current_user.email
+      h6= link_to "Sign out", destroy_user_session_path, method: :delete
+
+      h6= current_user.email
+
+      h6= link_to 'My Awards', awards_path
     - else
       h4 = link_to "Login", new_user_session_path

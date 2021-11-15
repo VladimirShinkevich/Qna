@@ -1,0 +1,12 @@
+- if @awards.present?
+  h1(class= "text text-center")= "Congratulations your have #{@awards.count} award(s)!!!"
+  - @awards.each do |a|
+    div(class="container border bg-light mb-3")
+      p= "Award name - #{a.name}"
+      br
+      = image_tag a.image, size: "300x200", class:"rounded float-start img-thumbnail"
+- else
+  h1(class= "text text-center") No awards yet
+
+p= link_to "Back to the question list", questions_path, class: "btn btn-success", type: "button"
+

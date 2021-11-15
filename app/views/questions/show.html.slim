@@ -1,16 +1,16 @@
 div(class="container-xl")
-  p Question
+  h1(class="text-center") Question
 
   .question
     = render @question
 
-  p Answers list:
+  h1(class="text-center") Answers list
 
   .answers
     = render partial: 'questions/all_answers', resource: @question
 
   - if current_user
-    p Ask new Answer:
+    h1(class="text-center") Ask new Answer
     = render partial: 'answers/new_answer', resource: @answer
 
   p= link_to 'Back to questions list', questions_path

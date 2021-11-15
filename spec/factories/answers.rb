@@ -8,6 +8,12 @@ FactoryBot.define do
       body { nil }
     end
 
+    trait :with_link do
+      after(:create) do |answer|
+        create(:link, linkable: answer)
+      end
+    end
+
     trait :answer_with_files do 
       after(:build) do |answer|
         answer.files.attach(

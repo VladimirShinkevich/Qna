@@ -1,0 +1,8 @@
+.link id="link-#{link.id}"
+  - if link.gist?
+    .gist-link
+      = javascript_include_tag link.url+".js"
+  p= link_to link.name, url_for(link.url), target: "_blank", type: "button", class: "btn btn-info"
+
+  - if current_user&.author_of?(link.linkable)
+    p= link_to 'Delete link', link_path(link), method: :delete, remote: true, class: 'btn btn-danger', type: 'button'

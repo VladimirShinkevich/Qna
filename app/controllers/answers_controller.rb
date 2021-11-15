@@ -26,6 +26,7 @@ class AnswersController < ApplicationController
   def mark_as_best
     @question = @answer.question
     @question.update(best_answer_id: @answer.id)
+    @question.award&.update(user: @answer.author)
   end
 
   private 
@@ -39,6 +40,6 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:body, files: [])
+    params.require(:answer).permit(:body, files: [], links_attributes: [:id, :name, :url, :_destroy])
   end
 end

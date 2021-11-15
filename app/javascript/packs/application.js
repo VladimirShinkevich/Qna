@@ -17,6 +17,9 @@ global.jQuery, global.$ = require("jquery");
 require("../utilities/edit_answer")
 require("../utilities/edit_question")
 
+require("jquery")
+require("@nathanvda/cocoon")
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

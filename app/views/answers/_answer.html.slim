@@ -1,31 +1,51 @@
 ul
-div(class="container border bg-light")
+div(class="container border bg-success p-2 text-dark bg-opacity-25")
   .answer id="answer-#{answer.id}"
     div(class= "answer-errors-#{answer.id}")
-    p= "Author: #{answer.author.email}"
-    p= "Answer: #{answer.body}"
-    p= "Files: "
 
-  - if answer.files.attached?
-    - answer.files.each do |file|
-        div id="file-id-#{file.id}"
-          p= link_to file.filename.to_s, url_for(file), class: "btn btn-outline-info"
-          p= link_to "Delete file", file_path(file), method: :delete, class: "btn btn-outline-danger", remote: true if current_user&.author_of?(answer)
+    h3(class="text-center")= "Author: #{answer.author.email}"
 
-  .make_best
-    -if current_user&.author_of?(answer.question)
-      = link_to 'Best Answer!', mark_as_best_answer_path(answer), method: :patch, remote: true, class:"btn btn-success"
-      br
-    -if current_user&.author_of?(answer)
-      = link_to "Delete answer", answer_path(answer), method: :delete, remote: true, class: "btn btn-outline-danger"
-      br
-      = link_to 'Edit', '#', class: "edit-answer-link btn btn-outline-warning", data: { answer_id: answer.id }
+    div(class="container border bg-light mb-3")
+      p= "Answer: #{answer.body}"
 
-= form_with model: answer, local: false, class: 'hidden', html: { id: "edit-answer-#{answer.id}" } do |f|
-  = f.label :body, "Your answer"
-  = f.text_area :body, placeholder: 'Body'
+    div(class="container border bg-light mb-3")
+      p= "Files: "
 
-  = f.label :files
-  = f.file_field :files, multiple: true, direct_upload: true
+      - if answer.files.attached?
+        - answer.files.each do |file|
+            div id="file-id-#{file.id}"
+              p= link_to file.filename.to_s, url_for(file), class: "btn btn-outline-info", target: "_blank"
+              p= link_to "Delete file", file_path(file), method: :delete, class: "btn btn-outline-danger", remote: true if current_user&.author_of?(answer)
 
-  p= f.submit 'Save'
+
+    div(class="container border bg-light mb-3")
+      p= "Links: "
+      .answer_links
+        = render answer.links
+
+    .make_best
+      -if current_user&.author_of?(answer.question)
+        = link_to 'Best Answer!', mark_as_best_answer_path(answer), method: :patch, remote: true, class:"btn btn-success"
+        br
+      -if current_user&.author_of?(answer)
+        = link_to "Delete answer", answer_path(answer), method: :delete, remote: true, class: "btn btn-outline-danger"
+        br
+        = link_to 'Edit', '#', class: "edit-answer-link btn btn-outline-warning", data: { answer_id: answer.id }
+
+    = form_with model: answer, local: false, class: 'hidden container border bg-light mb-3', html: { id: "edit-answer-#{answer.id}" } do |f|
+      p
+        = f.label :body, "Your answer"
+        = f.text_area :body, placeholder: 'Body'
+      p
+        = f.label :files
+        = f.file_field :files, multiple: true, direct_upload: true
+
+      p Links:
+      p
+        = f.fields_for :links do |link|
+          = render 'answers/links_fields', f: link
+        .links
+          = link_to_add_association 'add link', f, :links, partial: 'answers/links_fields', class: 'btn btn-primary', type: 'button'
+
+
+      p= f.submit 'Save'

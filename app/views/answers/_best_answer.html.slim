@@ -2,8 +2,12 @@ p
   h3 The Best answer
   p= "Author: #{@question.best_answer.author.email}"
   p= "Answer: #{@question.best_answer.body}"
-  = 'Files: '
+  p= 'Files: '
   - if @question.best_answer.files.attached?
     - @question.best_answer.files.each do |file|
-      = link_to file.filename.to_s, url_for(file), class: "btn btn-outline-info"
+      = link_to file.filename.to_s, url_for(file), class: "btn btn-outline-info", target: "_blank"
+
+  p= 'Links: '
+  - @question.best_answer.links.each do |link|
+    = link_to link.name, link.url, type: "button", class: "btn btn-info", target: "_blank"
   hr

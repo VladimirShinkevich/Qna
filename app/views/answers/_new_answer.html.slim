@@ -1,10 +1,22 @@
-.answer-errors
-  =render 'shared/errors', resource: @answer
+div(class="container border bg-success p-2 text-dark bg-opacity-50")
 
-= form_with model: [@question, @answer], class: 'new-answer', local: false do |f|
-  = f.text_area :body, placeholder: 'Body'
+  .answer-errors
+    =render 'shared/errors', resource: @answer
 
-  p= f.label :files
-  = f.file_field :files, multiple: true
+  = form_with model: [@question, @answer], class: 'new-answer', local: false do |f|
+    p
+      = f.label :body, "Your answer"
+      = f.text_area :body, placeholder: 'Body'
 
-  p= f.submit 'Create answer'
+    p
+      = f.label :files
+      = f.file_field :files, multiple: true
+
+    p Links:
+    p
+      = f.fields_for :links do |link|
+        = render 'links/links_fields', f: link
+      .links
+        = link_to_add_association 'add link', f, :links, partial: 'links/links_fields', class: 'btn btn-primary', type: 'button'
+
+    p= f.submit 'Create answer'

@@ -64,6 +64,25 @@ feature 'User can edit his question' do
         expect(page).to have_link 'spec_helper.rb'
       end
     end
+
+    scenario 'edit question with links' do 
+
+      within '.question' do
+        click_on 'Edit question'
+
+        fill_in 'Your title', with: 'update title'
+        fill_in 'Your question', with: 'update question'
+        
+        click_on 'add link'
+
+        fill_in 'Link', with: "Yandex"
+        fill_in 'Url', with: 'http://yandex.ru'
+
+        click_on 'Save question'
+
+        expect(page).to have_link 'Yandex', href: 'http://yandex.ru'
+      end
+    end
   end
 
   scenario 'Authenticated user tries edit other users question' do 
