@@ -25,4 +25,26 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe "find_vote" do
+    let(:user) { create(:user) }
+
+    context "return vote" do
+      let(:question) { create(:question) }
+      let!(:vote) { create(:vote, author: user, votable: question) }
+
+      it "user has vote for question" do
+        expect(user.find_vote(question)).to eq vote
+      end
+    end
+
+    context "return nil" do
+      let(:question) { create(:question) }
+      let!(:vote) { create(:vote, author: user) }
+
+      it "user has no vote for question" do
+        expect(user.find_vote(question)).to be_nil
+      end
+    end
+  end
 end

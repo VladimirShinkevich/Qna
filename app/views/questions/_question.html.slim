@@ -55,3 +55,5 @@ br
 -if current_user&.author_of?(question)
   p= link_to "Delete question", question_path(question), method: :delete, remote: true, class: 'delete-question btn btn-danger', type: 'button'
   p= link_to "Edit question", '#', class: "edit-question-link btn btn-warning", type: 'button', data: { question_id: question.id }
+
+= render 'votes/vote_form', resource: question
