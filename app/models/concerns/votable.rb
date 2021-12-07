@@ -1,11 +1,11 @@
 module Votable
-	extend ActiveSupport::Concern
+  extend ActiveSupport::Concern
 
-	included do 
-		has_many :votes, dependent: :destroy, as: :votable
-	end
+  included do 
+    has_many :votes, dependent: :destroy, as: :votable
+  end
 
-	def rating
+  def rating
     votes.sum(:status)
   end
 end
