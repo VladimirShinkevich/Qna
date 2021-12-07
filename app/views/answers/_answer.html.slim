@@ -32,6 +32,8 @@ div(class="container border bg-success p-2 text-dark bg-opacity-25")
         br
         = link_to 'Edit', '#', class: "edit-answer-link btn btn-outline-warning", data: { answer_id: answer.id }
 
+    = render 'votes/vote_form', resource: answer
+
     = form_with model: answer, local: false, class: 'hidden container border bg-light mb-3', html: { id: "edit-answer-#{answer.id}" } do |f|
       p
         = f.label :body, "Your answer"

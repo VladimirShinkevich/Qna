@@ -14,8 +14,8 @@ import "jquery"
 
 global.jQuery, global.$ = require("jquery");
 
-require("../utilities/edit_answer")
-require("../utilities/edit_question")
+require("../utilities/answer")
+require("../utilities/question")
 
 require("jquery")
 require("@nathanvda/cocoon")
