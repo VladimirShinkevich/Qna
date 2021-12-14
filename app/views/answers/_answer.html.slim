@@ -27,10 +27,10 @@ div(class="container border bg-success p-2 text-dark bg-opacity-25")
       -if current_user&.author_of?(answer.question)
         = link_to 'Best Answer!', mark_as_best_answer_path(answer), method: :patch, remote: true, class:"btn btn-success"
         br
-      -if current_user&.author_of?(answer)
-        = link_to "Delete answer", answer_path(answer), method: :delete, remote: true, class: "btn btn-outline-danger"
-        br
-        = link_to 'Edit', '#', class: "edit-answer-link btn btn-outline-warning", data: { answer_id: answer.id }
+    -if current_user&.author_of?(answer)
+      = link_to "Delete answer", answer_path(answer), method: :delete, remote: true, class: "btn btn-outline-danger"
+      br
+      = link_to 'Edit', '#', class: "edit-answer-link btn btn-outline-warning", data: { answer_id: answer.id }
 
     = render 'votes/vote_form', resource: answer
 

@@ -2,9 +2,14 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!, except: :show
   before_action :find_question, only: %i[create]
   before_action :find_answer, only: %i[show destroy update mark_as_best]
-  
+ 
   def create 
     @answer = @question.answers.create(answer_params.merge(question: @question, author: current_user))
+    if @answer.save 
+      flash.now[:notice] = "Your answer successfully created."
+      ActionCable.server.broadcast("question_#{@question.id}", 
+                              { html: render_to_string(partial: 'answers/answer', locals: { answer: @answer }) })
+    end
   end
 
   def edit; end
@@ -29,7 +34,7 @@ class AnswersController < ApplicationController
     @question.award&.update(user: @answer.author)
   end
 
-  private 
+  private
 
   def find_answer
     @answer = Answer.with_attached_files.find(params[:id])

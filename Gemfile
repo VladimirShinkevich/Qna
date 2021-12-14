@@ -21,6 +21,7 @@ gem 'devise'
 gem 'aws-sdk-s3', require: false
 gem "cocoon"
 gem "validate_url"
+gem "gon"
 
 
 group :development, :test do

@@ -2,8 +2,9 @@ div
   h1(class="text-center") List of Questions
 div(class="container-xl text-center")
   div(class='list-group')
-    - @questions.each do |q|
-        p= link_to "#{q.title} (author - #{q.author&.email})", question_path(q), class: "list-group-item list-group-item-action"
+    .questions-list
+      - @questions.each do |q|
+          p= link_to "#{q.title} (author - #{q.author&.email})", question_path(q), class: "list-group-item list-group-item-action"
 
   - if current_user
     br
