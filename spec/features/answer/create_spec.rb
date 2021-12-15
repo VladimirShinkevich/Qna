@@ -15,6 +15,7 @@ feature 'User can create answer' do
     end
 
     scenario 'user tries to create a answer with valid attributes' do 
+
       fill_in 'Body', with: answer.body
       click_on 'Create answer'
 
@@ -80,7 +81,7 @@ feature 'User can create answer' do
           expect(page).to have_content 'spec_helper.rb'
           expect(page).to have_link 'Thinknetica', href: 'https://thinknetica.com'
           expect(page).to have_no_link 'Best answer'
-          #expect(page).to have_content 'Comments'
+          expect(page).to have_content 'Comments'
         end
       end
     end
@@ -106,9 +107,9 @@ feature 'User can create answer' do
       Capybara.using_session('another_user') do
         within ".answers" do
           expect(page).to have_content 'Some text'
-          expect(page).to have_no_link 'Best answer'
-          #expect(page).to have_content 'Comments'
-          #expect(page).to have_content 'New comment'
+          expect(page).to have_no_link 'Best Answer!'
+          expect(page).to have_content 'Comments'
+          expect(page).to have_content 'Comment'
         end
       end
     end
