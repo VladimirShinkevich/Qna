@@ -1,26 +1,26 @@
 div(class="container border bg-danger p-2 text-dark bg-opacity-50 mb-3")
   p Title:
-  = question.title
+  h3(id="question-title-#{question.id}") = question.title
 
 div(class="container border bg-danger p-2 text-dark bg-opacity-10 mb-3")
   p Body:
-  = question.body
+  h3(id="question-body-#{question.id}")= question.body
 
 div(class="container border bg-light mb-3")
 
   p Files:
   .file
-    - if @question.files.attached?
-      - @question.files.each do |file|
+    - if question.files.attached?
+      - question.files.each do |file|
         div id="file-id-#{file.id}"
           p= link_to file.filename.to_s, url_for(file), class: "btn btn-outline-info", target: "_blank"
           p= link_to "Delete file", file_path(file), method: :delete, remote: true, class: "btn btn-outline-danger" if current_user&.author_of?(question)
 
 div(class="container border bg-light mb-3")
   p Award:
-  - if @question.award.present?
+  - if question.award.present?
     = image_tag @question.award.image, size:"300x200"
-    = @question.award.name
+    = question.award.name
 
 div(class="container border bg-light")
   p Links:
@@ -57,3 +57,5 @@ br
   p= link_to "Edit question", '#', class: "edit-question-link btn btn-warning", type: 'button', data: { question_id: question.id }
 
 = render 'votes/vote_form', resource: question
+
+= render 'comments/all_comments', resource: question

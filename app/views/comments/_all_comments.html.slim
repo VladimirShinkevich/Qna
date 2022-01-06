@@ -1,0 +1,6 @@
+div class="comments comments_#{resource.class.name}_#{resource.id}" data-id="#{resource.class.name}_#{resource.id}"
+  h5 Comments
+  div
+  = render resource.comments
+
+= render 'comments/new_comment', resource: resource

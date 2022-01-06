@@ -1,7 +1,7 @@
 div(class="container-xl")
   h1(class="text-center") Question
 
-  .question
+  .question data-id="#{@question.id}"
     = render @question
 
   h1(class="text-center") Answers list
@@ -9,7 +9,7 @@ div(class="container-xl")
   .answers
     = render partial: 'questions/all_answers', resource: @question
 
-  - if current_user
+  - if !current_user&.author_of?(@question)
     h1(class="text-center") Ask new Answer
     = render partial: 'answers/new_answer', resource: @answer
 

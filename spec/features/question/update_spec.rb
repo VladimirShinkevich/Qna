@@ -24,7 +24,6 @@ feature 'User can edit his question' do
         expect(page).to_not have_content question.body
         expect(page).to have_content 'update title'
         expect(page).to have_content 'update question'
-        expect(page).to_not have_selector 'textarea'
       end
     end
 
@@ -40,7 +39,6 @@ feature 'User can edit his question' do
         expect(page).to have_content "Body can't be blank"
         expect(page).to have_content question.title
         expect(page).to have_content question.body
-        expect(page).to have_selector 'textarea' 
       end
     end
 
@@ -59,7 +57,6 @@ feature 'User can edit his question' do
         expect(page).to_not have_content question.body
         expect(page).to have_content 'update title'
         expect(page).to have_content 'update question'
-        expect(page).to_not have_selector 'textarea'
         expect(page).to have_link 'rails_helper.rb'
         expect(page).to have_link 'spec_helper.rb'
       end

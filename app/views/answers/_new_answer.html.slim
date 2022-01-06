@@ -1,4 +1,4 @@
-div(class="container border bg-success p-2 text-dark bg-opacity-50")
+div(class="new_answer container border bg-success p-2 text-dark bg-opacity-50")
 
   .answer-errors
     =render 'shared/errors', resource: @answer
@@ -14,9 +14,10 @@ div(class="container border bg-success p-2 text-dark bg-opacity-50")
 
     p Links:
     p
-      = f.fields_for :links do |link|
-        = render 'links/links_fields', f: link
-      .links
-        = link_to_add_association 'add link', f, :links, partial: 'links/links_fields', class: 'btn btn-primary', type: 'button'
+      #links
+        = f.fields_for :links do |link|
+          = render 'links/links_fields', f: link
+        .links
+          = link_to_add_association 'add link', f, :links, partial: 'links/links_fields', class: 'btn btn-primary', type: 'button'
 
     p= f.submit 'Create answer'
