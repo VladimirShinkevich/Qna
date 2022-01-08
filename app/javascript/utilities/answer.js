@@ -9,9 +9,10 @@ $(document).on('turbolinks:load', function(){
 });
 
 $(document).on('turbolinks:load', function () {
-  $('.answers').on('ajax:success', function (event) {
-
+  $('.answers .vote').on('ajax:success', function (event) {
+    console.log(event)
     vote = event.detail[0].vote;
+    console.log(vote)
     rating = event.detail[0].rating;
     answer_id = vote.votable_id;
     
@@ -20,7 +21,7 @@ $(document).on('turbolinks:load', function () {
     $('#answer-' + answer_id + ' h4.vote-rating').html('Current rating: ' + rating);
   })
 
-  $('.answers p.cansel-vote-link').on('ajax:success', function (event) {
+  $('.answers .vote .cancel-vote-link').on('ajax:success', function (event) {
     rating = event.detail[0].rating;
     answer_id = event.detail[0].votable_id;
 

@@ -6,6 +6,8 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+Dotenv::Railtie.load
+
 module Qna
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -20,6 +22,8 @@ module Qna
     # config.eager_load_paths << Rails.root.join("extras")
 
     #config.action_cable.disable_request_forgery_protection = false
+
+    config.autoload_paths += [config.root.join('app')]
 
     config.generators do |g|
       g.test_framework :rspec,

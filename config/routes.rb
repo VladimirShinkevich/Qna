@@ -1,14 +1,17 @@
 Rails.application.routes.draw do
   root 'questions#index'
 
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'oauth_callbacks' }
+
+  namespace :users do
+    resources :get_emails, only: [:show, :create]
+  end
   
   resources :files, only: [:destroy]
   resources :links, only: [:destroy]
   resources :awards, only: [:index]
   resources :votes, only: [:create, :destroy]
-  #resources :comments, only: :create
-
+  
   mount ActionCable.server => '/cable'
 
   resources :questions do
