@@ -2,6 +2,7 @@
 require 'spec_helper'
 require 'validate_url/rspec_matcher'
 require 'capybara/email/rspec'
+require 'pundit/rspec'
 
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)

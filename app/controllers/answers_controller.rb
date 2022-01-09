@@ -4,6 +4,7 @@ class AnswersController < ApplicationController
   before_action :find_answer, only: %i[show destroy update mark_as_best]
  
   def create 
+    authorize Answer
     @answer = @question.answers.create(answer_params.merge(question: @question, author: current_user))
     if @answer.save 
       flash.now[:notice] = "Your answer successfully created."
@@ -15,20 +16,19 @@ class AnswersController < ApplicationController
   def edit; end
 
   def destroy
-    if current_user&.author_of?(@answer)
-      @answer.destroy
-      @question = @answer.question
-    end
+    authorize @answer
+    @answer.destroy
+    @question = @answer.question
   end
 
   def update
-    if current_user&.author_of?(@answer)
-      @answer.update(answer_params)
-      @question = @answer.question
-    end
+    authorize @answer
+    @answer.update(answer_params)
+    @question = @answer.question
   end
 
   def mark_as_best
+    authorize @answer
     @question = @answer.question
     @question.update(best_answer_id: @answer.id)
     @question.award&.update(user: @answer.author)
