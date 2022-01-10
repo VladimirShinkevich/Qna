@@ -3,17 +3,20 @@ class QuestionsController < ApplicationController
   before_action :find_question, only: %i[show edit update destroy]
   after_action :publish_question, only: [:create]
   
-  def index 
+  def index
+    authorize Question
     @questions = Question.all
   end
 
   def new
+    authorize Question
     @question = current_user.questions.new
     @question.links.new
     @question.build_award
   end
 
   def show
+    authorize @question
     @answer = Answer.new(question: @question)
     @answer.links.new
   end
@@ -21,6 +24,7 @@ class QuestionsController < ApplicationController
   def edit; end
 
   def create
+    authorize Question
     @question = current_user.questions.new(question_params)
 
     if @question.save
@@ -31,18 +35,14 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if current_user&.author_of?(@question)
-      @question.update(question_params)
-    end
+    authorize @question
+    @question.update(question_params)
   end
 
   def destroy
-    if current_user&.author_of?(@question)
-      @question.destroy 
-      redirect_to questions_path, notice: "You question was successfuly deleted!"
-    else
-      render :show, notice: 'You are not a author of question!'
-    end
+    authorize @question
+    @question.destroy 
+    redirect_to questions_path, notice: "You question was successfuly deleted!"
   end
 
   private

@@ -14,7 +14,7 @@ div(class="container border bg-light mb-3")
       - question.files.each do |file|
         div id="file-id-#{file.id}"
           p= link_to file.filename.to_s, url_for(file), class: "btn btn-outline-info", target: "_blank"
-          p= link_to "Delete file", file_path(file), method: :delete, remote: true, class: "btn btn-outline-danger" if current_user&.author_of?(question)
+          p= link_to "Delete file", file_path(file), method: :delete, remote: true, class: "btn btn-outline-danger" if policy(question).destroy?
 
 div(class="container border bg-light mb-3")
   p Award:
@@ -52,9 +52,8 @@ div(class="container border bg-light")
 
 br
 
--if current_user&.author_of?(question)
-  p= link_to "Delete question", question_path(question), method: :delete, remote: true, class: 'delete-question btn btn-danger', type: 'button'
-  p= link_to "Edit question", '#', class: "edit-question-link btn btn-warning", type: 'button', data: { question_id: question.id }
+p= link_to "Delete question", question_path(question), method: :delete, remote: true, class: 'delete-question btn btn-danger', type: 'button' if policy(question).destroy?
+p= link_to "Edit question", '#', class: "edit-question-link btn btn-warning", type: 'button', data: { question_id: question.id } if policy(question).update?
 
 = render 'votes/vote_form', resource: question
 
