@@ -159,7 +159,7 @@ RSpec.describe QuestionsController, type: :controller do
 
         it 're render show' do 
           delete :destroy, params: { id: question }
-          expect(response).to render_template :show
+          expect(response).to_not render_template :show
         end
       end
     end

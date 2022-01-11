@@ -111,7 +111,7 @@ RSpec.describe AnswersController, type: :controller do
 
       it 'render destroy template' do 
         delete :destroy, params: { id: answer }, format: :js
-        expect(response).to render_template :destroy
+        expect(response).to_not render_template :destroy
       end
     end
   end
@@ -143,7 +143,7 @@ RSpec.describe AnswersController, type: :controller do
 
       it 'renders mark_best view' do
         patch :mark_as_best, params: { id: answer }, format: :js
-        expect(response).to render_template :mark_as_best
+        expect(response).to_not render_template :mark_as_best
       end
     end
   end
