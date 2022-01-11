@@ -11,10 +11,6 @@ class User < ApplicationRecord
   has_many :comments, foreign_key: 'author_id', dependent: :destroy
   has_many :authorizations, dependent: :destroy
 
-  def author_of?(resource)
-    resource&.author_id == id
-  end
-
   def find_vote(votable)
     Vote.find_by(author_id: id, votable_id: votable.id, votable_type: votable.class.name)
   end

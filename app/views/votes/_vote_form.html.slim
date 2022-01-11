@@ -1,7 +1,7 @@
 .vote
   h4.vote-rating = "Current rating: #{resource.rating}"
 
-  - if user_signed_in? && !current_user.author_of?(resource)
+  - if user_signed_in? && !policy(resource).destroy?
     - if current_user.find_vote(resource)
       .cancel-vote-link
         = link_to "Cancel vote", vote_path(current_user.find_vote(resource)), method: :delete, data: { type: :json }, remote: true
