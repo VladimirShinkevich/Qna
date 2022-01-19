@@ -116,7 +116,7 @@ RSpec.describe VotesController, type: :controller do
         it 'returns forbidden status' do
           delete :destroy, params: { id: vote2 }, format: :json
 
-          expect(response).to_not have_http_status(:forbidden)
+          expect(response).to have_http_status(:forbidden)
         end
       end
     end

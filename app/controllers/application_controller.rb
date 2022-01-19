@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
 
   include Pundit
 
+  rescue_from Pundit::NotAuthorizedError do |exception| 
+    head :forbidden
+  end
+
   private
 
   def set_gon_user
