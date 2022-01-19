@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe FilesController, type: :controller do
-
   describe 'DELETE #destroy' do
     context 'when question attachment' do
       subject(:delete_request) { delete :destroy, params: { id: question.files.first, format: :js } }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LinkPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
@@ -6,6 +8,6 @@ class LinkPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user&.id == record.linkable.author_id
+    user&.admin? || user&.author_of?(record.linkable)
   end
 end

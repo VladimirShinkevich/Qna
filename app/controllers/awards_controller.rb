@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class AwardsController < ApplicationController
-	before_action :authenticate_user!
+  before_action :authenticate_user!
 
   def index
     @awards = current_user.awards

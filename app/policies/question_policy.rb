@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class QuestionPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
@@ -14,19 +16,18 @@ class QuestionPolicy < ApplicationPolicy
   end
 
   def create?
-    user
+    user&.admin? || user
   end
 
   def update?
-    user&.id == record.author_id
+    user&.admin? || user&.author_of?(record)
   end
 
   def destroy?
-    user&.id == record.author_id
+    user&.admin? || user&.author_of?(record)
   end
 
   def vote?
-    user&.id != record.author_id
+    user&.admin? || !user&.author_of?(record)
   end
-
 end

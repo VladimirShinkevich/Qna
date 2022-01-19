@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :answer do
-    body { "MyText" }
+    body { 'MyText' }
     question
     association :author, factory: :user
 
@@ -14,16 +16,17 @@ FactoryBot.define do
       end
     end
 
-    trait :answer_with_files do 
+    trait :answer_with_files do
       after(:build) do |answer|
         answer.files.attach(
-        io: File.open("#{Rails.root}/spec/rails_helper.rb"),
-        filename: 'rails_helper.rb')
+          io: File.open("#{Rails.root}/spec/rails_helper.rb"),
+          filename: 'rails_helper.rb'
+        )
       end
     end
 
     trait :without_question do
-    body { 'MyAnswer' }
-  end
+      body { 'MyAnswer' }
+    end
   end
 end

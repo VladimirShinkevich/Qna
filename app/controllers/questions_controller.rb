@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: %i[index show]
   before_action :find_question, only: %i[show edit update destroy]
   after_action :publish_question, only: [:create]
-  
+
   def index
     authorize Question
     @questions = Question.all
@@ -41,8 +43,8 @@ class QuestionsController < ApplicationController
 
   def destroy
     authorize @question
-    @question.destroy 
-    redirect_to questions_path, notice: "You question was successfuly deleted!"
+    @question.destroy
+    redirect_to questions_path, notice: 'You question was successfuly deleted!'
   end
 
   private
@@ -52,18 +54,18 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :body, award_attributes: [:id, :name, :image, :_destroy], files: [], 
-      links_attributes: [:id, :name, :url, :_destroy])
-  end  
+    params.require(:question).permit(:title, :body, award_attributes: %i[id name image _destroy], files: [],
+                                                    links_attributes: %i[id name url _destroy])
+  end
 
   def publish_question
-    return if @question.errors.any? 
+    return if @question.errors.any?
 
     question_pub = ApplicationController.render(
-      partial: "questions/question_pub",
-      locals: { question: @question },
+      partial: 'questions/question_pub',
+      locals: { question: @question }
     )
 
-    ActionCable.server.broadcast("questions", { question_pub: question_pub })
+    ActionCable.server.broadcast('questions', { question_pub: question_pub })
   end
 end

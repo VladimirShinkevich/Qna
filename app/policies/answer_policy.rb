@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AnswerPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
@@ -6,22 +8,22 @@ class AnswerPolicy < ApplicationPolicy
   end
 
   def create?
-    user
+    user&.admin? || user
   end
 
   def update?
-    user&.id == record.author_id
+    user&.admin? || user&.author_of?(record)
   end
 
   def destroy?
-    user&.id == record.author_id
+    user&.admin? || user&.author_of?(record)
   end
 
   def mark_as_best?
-    user&.id == record.question.author_id
+    user&.admin? || user&.author_of?(record.question)
   end
 
   def vote?
-    user&.id != record.author_id
+    user&.admin? || !user&.author_of?(record)
   end
 end

@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 feature 'User can add links to answer' do
-
   given(:user) { create(:user) }
   given!(:question) { create(:question) }
   given(:answer) { create(:answer) }
@@ -9,15 +10,14 @@ feature 'User can add links to answer' do
   given(:google_link) { 'http://google.ru' }
 
   describe 'Authenticated user', js: true do
-
-    background do 
+    background do
       signin(user)
       visit question_path(question)
 
       fill_in 'Your answer', with: answer.body
     end
 
-    scenario 'adds links when asks answer' do 
+    scenario 'adds links when asks answer' do
       fill_in 'Link', with: 'My link'
       fill_in 'Url', with: gist_url
 
@@ -28,7 +28,7 @@ feature 'User can add links to answer' do
       end
     end
 
-    scenario 'adds more than one link to answer' do 
+    scenario 'adds more than one link to answer' do
       click_on 'add link'
 
       page.all(:fillable_field, 'Link').first.set('My gist')
@@ -45,7 +45,7 @@ feature 'User can add links to answer' do
     end
   end
 
-  scenario 'Unauthenticated user tries to add answer links ' do 
+  scenario 'Unauthenticated user tries to add answer links ' do
     visit questions_path
 
     expect(page).to_not have_link 'Create answer'

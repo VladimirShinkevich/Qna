@@ -1,57 +1,76 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe AnswerPolicy, type: :policy do
   let(:user) { create(:user) }
+  let(:admin) { create(:user, admin: true) }
   let(:guest) { nil }
 
   subject { described_class }
 
   permissions :create? do
-    it 'grant access if user registration' do 
+    it 'grant access if user registration' do
       expect(subject).to permit(user)
     end
 
-    it 'denies access if user is a guest' do 
+    it 'denies access if user is a guest' do
       expect(subject).to_not permit(guest)
+    end
+
+    it 'grant access if user is admin' do
+      expect(subject).to permit(admin)
     end
   end
 
   permissions :update? do
-    it 'grant access if user is author' do 
+    it 'grant access if user is admin' do
+      expect(subject).to permit(admin)
+    end
+
+    it 'grant access if user is author' do
       expect(subject).to permit(user, create(:answer, author: user))
     end
 
-    it 'denies access if user is not author' do 
+    it 'denies access if user is not author' do
       expect(subject).to_not permit(User.new, create(:answer, author: user))
     end
   end
 
   permissions :destroy? do
-    it 'grant access if user is author' do 
+    it 'grant access if user is admin' do
+      expect(subject).to permit(admin)
+    end
+
+    it 'grant access if user is author' do
       expect(subject).to permit(user, create(:answer, author: user))
     end
 
     it 'denies access if user is not author' do
-      expect(subject).to_not permit(User.new, create(:answer, author: user))      
+      expect(subject).to_not permit(User.new, create(:answer, author: user))
     end
   end
 
-  permissions :mark_as_best? do 
-    it 'grant access if user is author' do 
+  permissions :mark_as_best? do
+    it 'grant access if user is admin' do
+      expect(subject).to permit(admin)
+    end
+
+    it 'grant access if user is author' do
       expect(subject).to permit(user, create(:answer, question: create(:question, author: user)))
     end
 
-    it 'denies access if user is not author' do 
+    it 'denies access if user is not author' do
       expect(subject).to_not permit(User.new, create(:answer, question: create(:question, author: user)))
     end
   end
 
-  permissions :vote? do 
-    it 'grant access if user is author of question' do 
+  permissions :vote? do
+    it 'grant access if user is author of question' do
       expect(subject).to permit(user, create(:answer))
     end
 
-    it 'denies access if user is not author of question' do 
+    it 'denies access if user is not author of question' do
       expect(subject).to_not permit(user, create(:answer, author: user))
     end
   end

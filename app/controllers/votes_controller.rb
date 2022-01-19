@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VotesController < ApplicationController
   before_action :authenticate_user!
   before_action :find_votable, only: :create
@@ -20,7 +22,6 @@ class VotesController < ApplicationController
   end
 
   def destroy
-
     @vote = Vote.find(params[:id])
     authorize @vote
     respond_to do |format|

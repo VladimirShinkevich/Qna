@@ -1,19 +1,19 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-feature 'User can edit his question' do 
+feature 'User can edit his question' do
   given!(:user) { create(:user) }
   given(:user_not_author) { create(:user) }
   given!(:question) { create(:question, author: user) }
 
-  describe 'Authenticated user', js: true do 
-
-    background do 
+  describe 'Authenticated user', js: true do
+    background do
       signin(user)
       visit question_path(question)
     end
 
-    scenario 'can edit his question' do 
-
+    scenario 'can edit his question' do
       within '.question' do
         click_on 'Edit question'
         fill_in 'Your title', with: 'update title'
@@ -27,8 +27,7 @@ feature 'User can edit his question' do
       end
     end
 
-    scenario 'can not edits his question' do 
-
+    scenario 'can not edits his question' do
       within '.question' do
         click_on 'Edit question'
         fill_in 'Your title', with: ''
@@ -42,8 +41,7 @@ feature 'User can edit his question' do
       end
     end
 
-    scenario 'edit question with attached files' do 
-
+    scenario 'edit question with attached files' do
       within '.question' do
         click_on 'Edit question'
         fill_in 'Your title', with: 'update title'
@@ -62,17 +60,16 @@ feature 'User can edit his question' do
       end
     end
 
-    scenario 'edit question with links' do 
-
+    scenario 'edit question with links' do
       within '.question' do
         click_on 'Edit question'
 
         fill_in 'Your title', with: 'update title'
         fill_in 'Your question', with: 'update question'
-        
+
         click_on 'add link'
 
-        fill_in 'Link', with: "Yandex"
+        fill_in 'Link', with: 'Yandex'
         fill_in 'Url', with: 'http://yandex.ru'
 
         click_on 'Save question'
@@ -82,14 +79,14 @@ feature 'User can edit his question' do
     end
   end
 
-  scenario 'Authenticated user tries edit other users question' do 
+  scenario 'Authenticated user tries edit other users question' do
     signin(user_not_author)
     visit question_path(question)
-    
+
     expect(page).to_not have_link 'Edit question'
   end
 
-  scenario 'Unauthenticated user can not edit question' do 
+  scenario 'Unauthenticated user can not edit question' do
     visit question_path(question)
     expect(page).to_not have_link 'Edit question'
   end

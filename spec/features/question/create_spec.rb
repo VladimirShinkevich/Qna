@@ -1,36 +1,36 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 feature 'User can create question' do
-  
   given(:user) { create(:user) }
   given(:question) { create(:question) }
 
-  describe 'Authenticated user' do 
-
-    background do 
+  describe 'Authenticated user' do
+    background do
       signin(user)
 
       visit questions_path
       click_on 'Ask question'
     end
 
-    scenario 'user can asks a question' do 
+    scenario 'user can asks a question' do
       fill_in 'Title', with: question.title
       fill_in 'Body', with: question.body
       click_on 'Ask'
 
-      expect(page).to have_content "Your question is successfuly created."
+      expect(page).to have_content 'Your question is successfuly created.'
       expect(page).to have_content question.title
       expect(page).to have_content question.body
     end
 
-    scenario 'asks a question with errors' do 
+    scenario 'asks a question with errors' do
       click_on 'Ask'
 
       expect(page).to have_content "Title can't be blank"
     end
 
-    scenario 'ask question with attached file' do 
+    scenario 'ask question with attached file' do
       fill_in 'Title', with: question.title
       fill_in 'Body', with: question.body
 
@@ -41,21 +41,21 @@ feature 'User can create question' do
       expect(page).to have_link 'spec_helper.rb'
     end
 
-    scenario 'ask question with award' do 
+    scenario 'ask question with award' do
       fill_in 'Title', with: question.title
       fill_in 'Body', with: question.body
 
-      fill_in 'Name', with: "Award"
+      fill_in 'Name', with: 'Award'
       attach_file 'Image', Rails.root.join('spec/fixture/test_image.jpg')
 
       click_on 'Ask'
 
       expect(page).to have_content 'Award'
-      expect(page).to have_css("img[src*='test_image.jpg']")    
+      expect(page).to have_css("img[src*='test_image.jpg']")
     end
   end
 
-  scenario 'Unauthenticated user tries to ask question' do 
+  scenario 'Unauthenticated user tries to ask question' do
     visit questions_path
 
     expect(page).to_not have_link 'Ask question'

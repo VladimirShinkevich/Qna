@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VotePolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
@@ -6,6 +8,6 @@ class VotePolicy < ApplicationPolicy
   end
 
   def destroy?
-    user&.id == record.author_id
+    user&.admin? || user&.author_of?(record)
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
@@ -6,6 +8,6 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def create?
-    user
+    user&.admin? || user
   end
 end
