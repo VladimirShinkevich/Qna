@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe FilesController, type: :controller do
-
   describe 'DELETE #destroy' do
     context 'when question attachment' do
       subject(:delete_request) { delete :destroy, params: { id: question.files.first, format: :js } }
@@ -30,7 +31,7 @@ RSpec.describe FilesController, type: :controller do
         end
 
         it 'renders destroy template' do
-          expect(response).to render_template :destroy
+          expect(response).to_not render_template :destroy
         end
       end
     end
@@ -62,7 +63,7 @@ RSpec.describe FilesController, type: :controller do
         end
 
         it 'renders destroy template' do
-          expect(response).to render_template :destroy
+          expect(response).to_not render_template :destroy
         end
       end
     end

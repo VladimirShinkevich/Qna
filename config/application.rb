@@ -1,6 +1,8 @@
-require_relative "boot"
+# frozen_string_literal: true
 
-require "rails/all"
+require_relative 'boot'
+
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -21,17 +23,18 @@ module Qna
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    #config.action_cable.disable_request_forgery_protection = false
+    # config.action_cable.disable_request_forgery_protection = false
 
     config.autoload_paths += [config.root.join('app')]
+    config.action_dispatch.rescue_responses["Pundit::NotAuthorizedError"] = :forbidden
 
     config.generators do |g|
       g.test_framework :rspec,
-                        controller_specs: true,
-                        view_specs: false,
-                        helper_specs: false,
-                        request_specs: false,
-                        routing_specs: false
+                       controller_specs: true,
+                       view_specs: false,
+                       helper_specs: false,
+                       request_specs: false,
+                       routing_specs: false
     end
   end
 end

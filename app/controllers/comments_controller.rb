@@ -1,15 +1,19 @@
-class CommentsController < ApplicationController
-	before_action :authenticate_user!
+# frozen_string_literal: true
 
-	def create
-		@comment = Comment.create(comment_params.merge(author: current_user, commentable: commentable))
+class CommentsController < ApplicationController
+  before_action :authenticate_user!
+
+  def create
+    authorize Comment
+    @comment = Comment.create(comment_params.merge(author: current_user, commentable: commentable))
     if @comment.save
       ActionCable.server.broadcast("comment_#{@comment.commentable_type}_#{@comment.commentable_id}",
-                                   { html: render_to_string(partial: 'comments/comment', locals: { comment: @comment }) })
+                                   { html: render_to_string(partial: 'comments/comment',
+                                                            locals: { comment: @comment }) })
     end
-	end
+  end
 
-	private
+  private
 
   def comment_params
     params.require(:comment).permit(:body, :commentable_type, :commentable_id)

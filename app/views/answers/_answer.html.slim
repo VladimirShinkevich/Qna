@@ -15,7 +15,7 @@ div(class="container border bg-success p-2 text-dark bg-opacity-25")
         - answer.files.each do |file|
             div id="file-id-#{file.id}"
               p= link_to file.filename.to_s, url_for(file), class: "btn btn-outline-info", target: "_blank"
-              p= link_to "Delete file", file_path(file), method: :delete, class: "btn btn-outline-danger", remote: true if current_user&.author_of?(answer)
+              p= link_to "Delete file", file_path(file), method: :delete, class: "btn btn-outline-danger", remote: true if policy(answer).destroy?
 
 
     div(class="container border bg-light mb-3")
@@ -24,13 +24,13 @@ div(class="container border bg-success p-2 text-dark bg-opacity-25")
         = render answer.links
 
     .make_best
-      -if current_user&.author_of?(answer.question)
+      -if policy(answer).mark_as_best?
         = link_to 'Best Answer!', mark_as_best_answer_path(answer), method: :patch, remote: true, class:"btn btn-success"
         br
-    -if current_user&.author_of?(answer)
-      = link_to "Delete answer", answer_path(answer), method: :delete, remote: true, class: "btn btn-outline-danger"
+
+    = link_to "Delete answer", answer_path(answer), method: :delete, remote: true, class: "btn btn-outline-danger" if policy(answer).destroy?
       br
-      = link_to 'Edit', '#', class: "edit-answer-link btn btn-outline-warning", data: { answer_id: answer.id }
+    = link_to 'Edit', '#', class: "edit-answer-link btn btn-outline-warning", data: { answer_id: answer.id } if policy(answer).update?
 
     = render 'votes/vote_form', resource: answer
 

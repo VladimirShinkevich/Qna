@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 class VotesController < ApplicationController
   before_action :authenticate_user!
   before_action :find_votable, only: :create
 
   def create
+    authorize @votable, :vote?
     @vote = @votable.votes.build(author: current_user, status: params[:status]&.to_sym)
 
     respond_to do |format|
@@ -20,11 +23,9 @@ class VotesController < ApplicationController
 
   def destroy
     @vote = Vote.find(params[:id])
-
+    authorize @vote
     respond_to do |format|
-      if current_user.author_of?(@vote)
-        @vote.destroy
-
+      if @vote.destroy
         format.json do
           render json: { rating: @vote.votable.rating, votable_id: @vote.votable.id }, status: :ok
         end

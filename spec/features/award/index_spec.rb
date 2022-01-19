@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-feature 'Authenticated user can watch his awards' do 
-
+feature 'Authenticated user can watch his awards' do
   given!(:user) { create(:user) }
   given!(:question) { create(:question, author: user) }
   given!(:answer) { create(:answer, question: question, author: user) }
@@ -19,9 +20,9 @@ feature 'Authenticated user can watch his awards' do
     expect(page).to have_css("img[src*='test_image.jpg']")
   end
 
-  scenario 'Unauthenticated user tries to watch awards' do 
+  scenario 'Unauthenticated user tries to watch awards' do
     visit root_path
 
-    expect(page).to_not have_link "My Awards"
+    expect(page).to_not have_link 'My Awards'
   end
 end

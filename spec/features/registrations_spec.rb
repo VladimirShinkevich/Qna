@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-feature 'User Registration' do 
-
-  scenario 'User tries registrated with valid attributes' do 
+feature 'User Registration' do
+  scenario 'User tries registrated with valid attributes' do
     visit new_user_registration_path
     fill_in 'Email', with: 'new_user@example.com'
     fill_in 'Password', with: attributes_for(:user)[:password]
@@ -16,7 +17,6 @@ feature 'User Registration' do
 
     expect(page).to have_content 'Your email address has been successfully confirmed.'
 
-    
     fill_in 'Email', with: 'new_user@example.com'
     fill_in 'Password', with: '12345678'
     click_on 'Log in'
@@ -24,7 +24,7 @@ feature 'User Registration' do
     expect(page).to have_content 'Signed in successfully.'
   end
 
-  scenario 'User tries registrated with invalid attributes' do 
+  scenario 'User tries registrated with invalid attributes' do
     visit new_user_registration_path
     fill_in 'Email', with: attributes_for(:user, :invalid)[:email]
     fill_in 'Password', with: attributes_for(:user, :invalid)[:password]
@@ -37,7 +37,7 @@ feature 'User Registration' do
 
   let(:user) { create(:user) }
 
-  scenario 'Authentificated user tries to registrated again' do 
+  scenario 'Authentificated user tries to registrated again' do
     visit new_user_registration_path
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
