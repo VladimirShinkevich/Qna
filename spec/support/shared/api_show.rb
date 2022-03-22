@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_examples_for 'API Show' do
   it_behaves_like 'API authorizable' do
     let(:method) { :get }
@@ -33,7 +35,7 @@ shared_examples_for 'API Show' do
         let(:author_json) { content_json['author_id'] }
         let(:author) { content.author }
         let(:size) { object.comments.size }
-        let(:content_attr) { %w(id body author_id created_at updated_at) }
+        let(:content_attr) { %w[id body author_id created_at updated_at] }
       end
     end
 
@@ -45,7 +47,7 @@ shared_examples_for 'API Show' do
         let(:author) { object.author }
         let(:content_json) { object_json['files'].first }
         let(:size) { object.files.size }
-        let(:content_attr) { %w(id filename) }
+        let(:content_attr) { %w[id filename] }
       end
     end
     describe 'links' do
@@ -56,7 +58,7 @@ shared_examples_for 'API Show' do
         let(:author) { object.author }
         let(:content_json) { object_json['links'].first }
         let(:size) { object.links.size }
-        let(:content_attr) { %w(id name url) }
+        let(:content_attr) { %w[id name url] }
       end
     end
   end

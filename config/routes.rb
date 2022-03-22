@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
+  authenticate :user, ->(u) { u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   use_doorkeeper
   root 'questions#index'
 
@@ -18,6 +24,7 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
   resources :questions do
+    resource :subscription, only: %i[create destroy]
     resources :comments, only: :create
     resources :answers, shallow: true, only: %i[create update destroy] do
       member do
@@ -27,9 +34,9 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :api do 
-    namespace :v1 do 
-      resources :profiles, only: [:index] do 
+  namespace :api do
+    namespace :v1 do
+      resources :profiles, only: [:index] do
         get :me, on: :collection
       end
 
@@ -38,5 +45,4 @@ Rails.application.routes.draw do
       end
     end
   end
-
 end

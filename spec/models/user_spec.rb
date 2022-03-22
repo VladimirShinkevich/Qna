@@ -8,6 +8,7 @@ RSpec.describe User, type: :model do
   it { should have_many(:questions).dependent(:destroy) }
   it { should have_many(:answers).dependent(:destroy) }
   it { should have_many(:authorizations).dependent(:destroy) }
+  it { should have_many(:subscriptions).dependent(:destroy) }
 
   describe 'find_vote' do
     let(:user) { create(:user) }
@@ -40,6 +41,21 @@ RSpec.describe User, type: :model do
       expect(FindForOauth).to receive(:new).with(auth).and_return(service)
       expect(service).to receive(:call)
       User.find_for_oauth(auth)
+    end
+  end
+
+  describe '#subscribed?' do
+    let(:user) { create :user }
+
+    let(:question) { create :question }
+
+    it 'true if user is subscribed to question' do
+      question.subscriptions.create!(user: user)
+      expect(user).to be_subscribed(question)
+    end
+
+    it 'false if user is not subscribed to question' do
+      expect(user).not_to be_subscribed(question)
     end
   end
 end

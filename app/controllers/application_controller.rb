@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   include Pundit
 
-  rescue_from Pundit::NotAuthorizedError do |exception| 
+  rescue_from Pundit::NotAuthorizedError do |_exception|
     head :forbidden
   end
 

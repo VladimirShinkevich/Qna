@@ -10,7 +10,7 @@ Doorkeeper.configure do
     current_user || warden.authenticate!(scope: :user)
   end
 
-   admin_authenticator do
+  admin_authenticator do
     if current_user
       head :forbidden unless current_user.admin?
     else
@@ -20,7 +20,7 @@ Doorkeeper.configure do
 
   # default_scopes :read
   # optional_scopes :write, :update
-    
+
   # You can use your own model classes if you need to extend (or even override) default
   # Doorkeeper models such as `Application`, `AccessToken` and `AccessGrant.
   #

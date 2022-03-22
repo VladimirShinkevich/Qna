@@ -9,9 +9,8 @@ class Question < ApplicationRecord
   belongs_to :best_answer, class_name: 'Answer', optional: true
 
   has_many :links, dependent: :destroy, as: :linkable
-
+  has_many :subscriptions, dependent: :destroy
   has_many_attached :files
-
   has_one :award, dependent: :destroy
 
   accepts_nested_attributes_for :links, reject_if: :all_blank
@@ -22,5 +21,13 @@ class Question < ApplicationRecord
 
   def other_answers
     answers.where.not(id: best_answer_id)
+  end
+
+  after_create :subscribe_author
+
+  private
+
+  def subscribe_author
+    subscriptions.create(user: author)
   end
 end
