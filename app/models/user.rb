@@ -31,6 +31,6 @@ class User < ApplicationRecord
   end
 
   def subscribed?(record)
-    record.subscriptions.where(user_id: id).any?
+    record.subscriptions.exists?(user_id: id)
   end
 end

@@ -17,7 +17,9 @@ class Answer < ApplicationRecord
 
   after_create :send_notification
 
-  private def send_notification
+  private
+
+  def send_notification
     NotificationService.new.new_answer(self)
   end
 end
