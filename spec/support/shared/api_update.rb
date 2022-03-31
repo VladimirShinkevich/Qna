@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_examples_for 'API Update Object' do
   it_behaves_like 'API authorizable' do
     let(:method) { :patch }

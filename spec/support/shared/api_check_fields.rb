@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_examples_for 'API Check Fields' do
   it 'returns all public fields' do
     local = content_object

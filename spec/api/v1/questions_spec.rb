@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-describe 'Questions API', type: :request do 
-  let(:headers) { { "ACCEPT" => 'application/json' } }
+describe 'Questions API', type: :request do
+  let(:headers) { { 'ACCEPT' => 'application/json' } }
   let(:access_token) { create(:access_token) }
-  let!(:questions) { create_list(:question, 3)}
+  let!(:questions) { create_list(:question, 3) }
   let(:question) { questions.first }
   let(:question_with_author) { create(:question, author_id: access_token.resource_owner_id) }
 
@@ -14,16 +16,16 @@ describe 'Questions API', type: :request do
       let(:object_json) { json['questions'].first }
       let(:objects_json) { json['questions'] }
       let(:size) { questions.size }
-      let(:object_attr) { %w(id title body created_at updated_at) }
+      let(:object_attr) { %w[id title body created_at updated_at] }
     end
   end
 
-  describe 'GET /api/v1/questions/:id' do 
-    it_behaves_like 'API Show' do 
-      let(:api_url) { "/api/v1/questions/#{question.id}"}
+  describe 'GET /api/v1/questions/:id' do
+    it_behaves_like 'API Show' do
+      let(:api_url) { "/api/v1/questions/#{question.id}" }
       let(:object) { question }
       let(:object_json) { json['question'] }
-      let(:object_attr) { %w(id title body created_at updated_at) }
+      let(:object_attr) { %w[id title body created_at updated_at] }
     end
   end
 
@@ -37,7 +39,7 @@ describe 'Questions API', type: :request do
     end
   end
 
-  describe 'PATCH api/v1/questions/:id' do 
+  describe 'PATCH api/v1/questions/:id' do
     it_behaves_like 'API Update Object' do
       let(:api_url) { "/api/v1/questions/#{question_with_author.id}" }
       let(:object_json) { json['question'] }
@@ -49,7 +51,7 @@ describe 'Questions API', type: :request do
     end
   end
 
-  describe 'DELETE /api/v1/questions/:id' do 
+  describe 'DELETE /api/v1/questions/:id' do
     it_behaves_like 'API Delete object' do
       let(:api_url) { "/api/v1/questions/#{question_with_author.id}" }
       let(:object_class) { question_with_author.class }
