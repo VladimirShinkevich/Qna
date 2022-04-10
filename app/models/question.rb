@@ -19,6 +19,8 @@ class Question < ApplicationRecord
   validates :title, presence: true
   validates :body, presence: true
 
+  ThinkingSphinx::Callbacks.append(self, behaviours: [:sql])
+
   def other_answers
     answers.where.not(id: best_answer_id)
   end

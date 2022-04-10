@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   resources :links, only: [:destroy]
   resources :awards, only: [:index]
   resources :votes, only: %i[create destroy]
+  resources :searches, only: :new
+  get 'search/result', to: 'searches#result'
 
   mount ActionCable.server => '/cable'
 
