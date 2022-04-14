@@ -6,6 +6,7 @@ default: &default
 development:
   <<: *default
   database: Qna_development
+  password: 12345
 
 test:
   <<: *default

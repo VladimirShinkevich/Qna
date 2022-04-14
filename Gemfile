@@ -19,6 +19,7 @@ gem 'doorkeeper'
 gem 'dotenv-rails'
 gem 'gon'
 gem 'jbuilder', '~> 2.7'
+gem 'mysql2', '~>0.5.0'
 gem 'oj'
 gem 'omniauth'
 gem 'omniauth-facebook'
@@ -33,6 +34,7 @@ gem 'sass-rails', '>= 6'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim-rails'
+gem 'thinking-sphinx', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'validate_url'
 gem 'webpacker', '~> 5.0'
@@ -40,6 +42,7 @@ gem 'whenever', require: false
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 5.0.0'
 end

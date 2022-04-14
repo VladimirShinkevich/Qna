@@ -1,5 +1,7 @@
 nav(class="nav justify-content-end navbar navbar-expand-lg navbar-light bg-info")
   div(class='conteiner-fluid')
+    = link_to 'Search', new_search_path
+    = link_to 'Questions', questions_path
     - if user_signed_in?
       h6= link_to "Sign out", destroy_user_session_path, method: :delete
 
