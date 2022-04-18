@@ -39,7 +39,7 @@ gem 'turbolinks', '~> 5'
 gem 'validate_url'
 gem 'webpacker', '~> 5.0'
 gem 'whenever', require: false
-gem 'mini_racer', '~> 0.5.0'
+#gem 'mini_racer', '~> 0.5.0'
 gem 'rake'
 
 group :development, :test do
