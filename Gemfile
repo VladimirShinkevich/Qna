@@ -40,8 +40,7 @@ gem 'validate_url'
 gem 'webpacker', '~> 5.0'
 gem 'whenever', require: false
 gem 'mini_racer', platforms: :ruby
-gem 'execjs'
-gem 'therubyracer'
+
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

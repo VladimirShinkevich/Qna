@@ -162,7 +162,6 @@ GEM
       dotenv (= 2.7.6)
       railties (>= 3.2)
     erubi (1.10.0)
-    execjs (2.8.1)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
@@ -210,7 +209,6 @@ GEM
       addressable (~> 2.7)
     letter_opener (1.7.0)
       launchy (~> 2.2)
-    libv8 (3.16.14.19-x86_64-linux)
     libv8-node (15.14.0.1-x86_64-linux)
     listen (3.7.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -315,7 +313,6 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redis (4.1.4)
-    ref (2.0.0)
     regexp_parser (2.1.1)
     request_store (1.5.0)
       rack (>= 1.4)
@@ -404,9 +401,6 @@ GEM
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     temple (0.8.2)
-    therubyracer (0.12.3)
-      libv8 (~> 3.16.14.15)
-      ref
     thinking-sphinx (5.4.0)
       activerecord (>= 4.2.0)
       builder (>= 2.1.2)
@@ -471,7 +465,6 @@ DEPENDENCIES
   devise
   doorkeeper
   dotenv-rails
-  execjs
   factory_bot_rails
   gon
   jbuilder (~> 2.7)
@@ -501,7 +494,6 @@ DEPENDENCIES
   sinatra
   slim-rails
   spring
-  therubyracer
   thinking-sphinx (~> 5.0)
   turbolinks (~> 5)
   tzinfo-data
