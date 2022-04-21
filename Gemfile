@@ -31,7 +31,7 @@ gem 'pundit'
 gem 'rails', '~> 6.1.4'
 gem 'rubocop-rails'
 gem 'sass-rails', '>= 6'
-gem 'sidekiq'
+gem 'sidekiq', '< 6.0'
 gem 'sinatra', require: false
 gem 'slim-rails'
 gem 'thinking-sphinx', '~> 5.0'
@@ -61,7 +61,7 @@ group :development do
   gem "capistrano-rvm", require: false
   gem "capistrano-passenger", require: false
   gem 'capistrano-ssh-doctor', git: 'https://github.com/capistrano-plugins/capistrano-ssh-doctor.git'
-
+  gem 'capistrano-sidekiq', require: false
 end
 
 group :test do
