@@ -120,7 +120,7 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
-  
+
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { host: '188.68.220.23', protocol: "https"}
   config.action_mailer.delivery_method = :smtp
@@ -130,7 +130,8 @@ Rails.application.configure do
     user_name: Rails.application.credentials[Rails.env.to_sym][:smtp][:smtp_username],
     password: Rails.application.credentials[Rails.env.to_sym][:smtp][:smtp_password],
     authentication: 'plain',
-    enable_starttls_auto: true
+    enable_starttls_auto: true,
+    tls: true
   }
 
     config.action_mailer.raise_delivery_errors = true
