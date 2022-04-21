@@ -130,8 +130,7 @@ Rails.application.configure do
     user_name: Rails.application.credentials[Rails.env.to_sym][:smtp][:smtp_username],
     password: Rails.application.credentials[Rails.env.to_sym][:smtp][:smtp_password],
     authentication: 'plain',
-    enable_starttls_auto: true,
-    tls: true
+    enable_starttls_auto: true
   }
 
     config.action_mailer.raise_delivery_errors = true
