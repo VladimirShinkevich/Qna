@@ -65,6 +65,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "Qna_production"
 
   config.action_mailer.perform_caching = false
+  config.action_cable.allowed_request_origins = [ 'http://188.68.220.23' ]
 
 
   # Ignore bad email addresses and do not raise email delivery errors.

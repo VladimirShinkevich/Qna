@@ -40,6 +40,7 @@ gem 'validate_url'
 gem 'webpacker', '~> 5.0'
 gem 'whenever', require: false
 gem 'mini_racer', platforms: :ruby
+gem 'unicorn'
 
 
 group :development, :test do
@@ -62,6 +63,7 @@ group :development do
   gem "capistrano-passenger", require: false
   gem 'capistrano-ssh-doctor', git: 'https://github.com/capistrano-plugins/capistrano-ssh-doctor.git'
   gem 'capistrano-sidekiq', require: false
+  gem 'capistrano3-unicorn', require: false
 end
 
 group :test do

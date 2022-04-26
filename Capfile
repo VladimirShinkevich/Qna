@@ -6,11 +6,12 @@ require "capistrano/deploy"
 require "capistrano/rvm"
 require "capistrano/bundler"
 require "capistrano/rails"
-require "capistrano/passenger"
+#require "capistrano/passenger"
 require 'capistrano/ssh_doctor'
 require 'capistrano/sidekiq'
 require 'whenever/capistrano'
 require 'thinking_sphinx/capistrano'
+require 'capistrano3/unicorn'
 
 install_plugin Capistrano::SCM::Git
 #install_plugin Capistrano::Sidekiq
