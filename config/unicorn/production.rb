@@ -1,4 +1,4 @@
-app_path = "/home/deploy/qna_shin"
+app_path = "/home/deployer/qna_shin"
 working_directory "#{app_path}/current"
 pid               "#{app_path}/current/tmp/pids/unicorn.pid"
 
