@@ -41,6 +41,7 @@ gem 'webpacker', '~> 5.0'
 gem 'whenever', require: false
 gem 'mini_racer', platforms: :ruby
 gem 'unicorn'
+gem 'redis-rails'
 
 
 group :development, :test do

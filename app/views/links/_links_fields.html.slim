@@ -1,9 +1,10 @@
-.nested-fields
-  .field
-    = f.label :name, "Link"
-    = f.text_field :name
-    br
-    = f.label :url
-    = f.text_field :url
+- cache f do
+  .nested-fields
+    .field
+      = f.label :name, "Link"
+      = f.text_field :name
+      br
+      = f.label :url
+      = f.text_field :url
 
-  = link_to_remove_association "remove link", f, class: 'btn btn-danger', type: 'button'
+    = link_to_remove_association "remove link", f, class: 'btn btn-danger', type: 'button'

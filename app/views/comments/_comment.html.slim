@@ -1,7 +1,8 @@
-div
-  = comment.author.email
-  br
-  = comment.body
+- cache comment do
+  div
+    = comment.author.email
+    br
+    = comment.body
 
 
 

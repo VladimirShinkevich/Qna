@@ -1,63 +1,64 @@
-div(class="container border bg-danger p-2 text-dark bg-opacity-50 mb-3")
-  p Title:
-  h3(id="question-title-#{question.id}") = question.title
+- cache question do
+  div(class="container border bg-danger p-2 text-dark bg-opacity-50 mb-3")
+    p Title:
+    h3(id="question-title-#{question.id}") = question.title
 
-div(class="container border bg-danger p-2 text-dark bg-opacity-10 mb-3")
-  p Body:
-  h3(id="question-body-#{question.id}")= question.body
+  div(class="container border bg-danger p-2 text-dark bg-opacity-10 mb-3")
+    p Body:
+    h3(id="question-body-#{question.id}")= question.body
 
-div(class="container border bg-light mb-3")
+  div(class="container border bg-light mb-3")
 
-  p Files:
-  .file
-    - if question.files.attached?
-      - question.files.each do |file|
-        div id="file-id-#{file.id}"
-          p= link_to file.filename.to_s, url_for(file), class: "btn btn-outline-info", target: "_blank"
-          p= link_to "Delete file", file_path(file), method: :delete, remote: true, class: "btn btn-outline-danger" if policy(question).destroy?
+    p Files:
+    .file
+      - if question.files.attached?
+        - question.files.each do |file|
+          div id="file-id-#{file.id}"
+            p= link_to file.filename.to_s, url_for(file), class: "btn btn-outline-info", target: "_blank"
+            p= link_to "Delete file", file_path(file), method: :delete, remote: true, class: "btn btn-outline-danger" if policy(question).destroy?
 
-div(class="container border bg-light mb-3")
-  p Award:
-  - if question.award.present?
-    = image_tag @question.award.image, size:"300x200"
-    = question.award.name
+  div(class="container border bg-light mb-3")
+    p Award:
+    - if question.award.present?
+      = image_tag @question.award.image, size:"300x200"
+      = question.award.name
 
-div(class="container border bg-light")
-  p Links:
-  .links
-    = render question.links
-
-.question-errors
-  =render 'shared/errors', resource: question
-
-= form_with model: question, local: false,class: 'hidden container border bg-light mb-3', html: { id: "edit-question-#{question.id}" } do |f|
-  p
-    = f.label :title, 'Your title'
-    = f.text_area :title, placeholder: 'Title'
-  p
-    = f.label :body, "Your question"
-    = f.text_area :body, placeholder: 'Body'
-  p
-    = f.label :files
-    = f.file_field :files, multiple: true, direct_upload: true
-
-  p Links:
-  p
-    = f.fields_for :links do |link|
-      = render 'questions/links_fields', f: link
+  div(class="container border bg-light")
+    p Links:
     .links
-      = link_to_add_association 'add link', f, :links, partial: 'questions/links_fields', class: 'btn btn-primary', type: 'button'
+      = render question.links
 
-  p= f.submit 'Save question'
+  .question-errors
+    =render 'shared/errors', resource: question
 
-br
+  = form_with model: question, local: false,class: 'hidden container border bg-light mb-3', html: { id: "edit-question-#{question.id}" } do |f|
+    p
+      = f.label :title, 'Your title'
+      = f.text_area :title, placeholder: 'Title'
+    p
+      = f.label :body, "Your question"
+      = f.text_area :body, placeholder: 'Body'
+    p
+      = f.label :files
+      = f.file_field :files, multiple: true, direct_upload: true
 
-p= link_to "Delete question", question_path(question), method: :delete, remote: true, class: 'delete-question btn btn-danger', type: 'button' if policy(question).destroy?
-p= link_to "Edit question", '#', class: "edit-question-link btn btn-warning", type: 'button', data: { question_id: question.id } if policy(question).update?
+    p Links:
+    p
+      = f.fields_for :links do |link|
+        = render 'questions/links_fields', f: link
+      .links
+        = link_to_add_association 'add link', f, :links, partial: 'questions/links_fields', class: 'btn btn-primary', type: 'button'
 
-= render 'votes/vote_form', resource: question
+    p= f.submit 'Save question'
 
-- if signed_in?
-  = render 'subscriptions/subscription', question: question
+  br
 
-= render 'comments/all_comments', resource: question
+  p= link_to "Delete question", question_path(question), method: :delete, remote: true, class: 'delete-question btn btn-danger', type: 'button' if policy(question).destroy?
+  p= link_to "Edit question", '#', class: "edit-question-link btn btn-warning", type: 'button', data: { question_id: question.id } if policy(question).update?
+
+  = render 'votes/vote_form', resource: question
+
+  - if signed_in?
+    = render 'subscriptions/subscription', question: question
+
+  = render 'comments/all_comments', resource: question
