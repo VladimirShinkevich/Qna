@@ -9,7 +9,7 @@ ruby '2.7.2'
 gem 'redis', '~> 4.0'
 # gem 'bcrypt', '~> 3.1.7'
 # gem 'image_processing', '~> 1.2'
-
+# test
 gem 'active_model_serializers', '~> 0.10'
 gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.4.4', require: false
