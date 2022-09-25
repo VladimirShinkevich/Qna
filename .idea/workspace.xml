@@ -5,47 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="832e0d76-a64b-4f89-8dae-1eb5b4ff0892" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Qna.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/jobs/reputation_job.rb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/mailers/daily_digest_mailer.rb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/services/daily_digest_service.rb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/services/notification_service.rb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/services/reputation.rb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/daily_digest_mailer/digest.html.slim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/daily_digest_mailer/digest.text.slim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/layouts/mailer.html.slim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/layouts/mailer.text.slim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/notification_mailer/new_answer.html.slim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/notification_mailer/new_answer.text.slim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/subscriptions/_subscription.html.slim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/subscriptions/create.js.erb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/subscriptions/destroy.js.erb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dump.rdb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spec/features/question/subscriptions_spec.rb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spec/fixtures/daily_dijest/dijest" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spec/jobs/reputation_job_spec.rb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spec/mailers/daily_digest_spec.rb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spec/mailers/previews/daily_digest_preview.rb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spec/services/daily_digest_service_spec.rb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spec/services/notification_service_spec.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/answer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/answer.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/question.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/question.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/user.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/questions/_question.html.slim" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/questions/_question.html.slim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/application.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/application.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/locales/en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/locales/en.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spec/models/answer_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/answer_spec.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spec/models/question_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/question_spec.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spec/models/user_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/user_spec.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,16 +23,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Groupprice" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/home/vsh/Документы/Ruby on Rails App/Qna",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "ruby.rails.projectView.checked": "true"
+  }
+}]]></component>
   <component name="RunManager" selected="Rails.Development: Qna">
     <configuration name="Development: Qna" type="RailsRunConfigurationType" factoryName="Rails">
       <module name="Qna" />
@@ -187,6 +151,7 @@
       <updated>1647870733623</updated>
       <workItem from="1647870736589" duration="6453000" />
       <workItem from="1647931502308" duration="11951000" />
+      <workItem from="1664109425402" duration="417000" />
     </task>
     <servers />
   </component>
